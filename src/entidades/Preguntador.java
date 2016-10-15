@@ -1,5 +1,7 @@
 package entidades;
 
-public class Preguntador {
+public class Preguntador
+{
 
+	
 }
