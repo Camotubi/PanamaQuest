@@ -31,7 +31,7 @@ public class Main {
 		
 		/* prueba de como imprime
 		for(int i =0; i<numJugadores;i++)
-		{
+		{  
 			Jugador temph = jugadores.get(i);
 			System.out.println(temph.getNombre());
 			
