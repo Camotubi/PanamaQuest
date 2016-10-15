@@ -15,8 +15,7 @@ public class Jugador {
 		nombre = nom;
 		comodines = 2;
 	}
-	
-	
+
 	public double getDinero() {
 		return dinero;
 	}
