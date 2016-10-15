@@ -6,9 +6,9 @@ public class Jugador {
 	
 	private double dinero;
 	private String nombre;
-<<<<<<< HEAD
+
 	private int comodines;  // 2 comodines por jugador
-	
+	private Pregunta preguntaRecibida;
 	
 	public Jugador(String nom)
 	{
@@ -17,19 +17,12 @@ public class Jugador {
 	}
 	
 	
-=======
-	private Pregunta preguntaRecibida;
->>>>>>> 302cdb1a74c7f4e32c4e3613871cde1f1ce7b6af
-	
 	public double getDinero() {
 		return dinero;
 	}
 	public void setDinero(double dinero) {
 		this.dinero = dinero;
 	}
-	
-	
-
 	
 	public String getNombre() {
 		return nombre;
