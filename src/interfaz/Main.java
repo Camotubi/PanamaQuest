@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import entidades.Jugador;
+
 public class Main {
 
 	public static void main(String[] args) {
