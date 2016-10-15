@@ -1,20 +1,26 @@
 package entidades;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 public class Pregunta {
-	public Pregunta(String pregunta, ArrayList<String> opciones, int respuesta, int categoria) {
+
+	private String pregunta;
+	private ArrayList<String> opciones = new ArrayList<String>();
+	private int respuesta;
+	private int categoria;
+	private String dirImagen;
+	private String dirAudio;
+
+	public Pregunta(String pregunta, ArrayList<String> opciones, int respuesta, int categoria,String dirImg,String dirAudio) {
 
 		this.pregunta = pregunta;
 		this.opciones = opciones;
 		this.respuesta = respuesta;
 		this.categoria = categoria;
+		this.dirImagen = dirImg;
+		this.dirAudio = dirAudio;
 	}
-	private String pregunta;
-	private ArrayList<String> opciones = new ArrayList<String>();
-	private int respuesta;
-	private int categoria;
-
 	public String getPregunta() {
 		return pregunta;
 	}
@@ -38,6 +44,18 @@ public class Pregunta {
 	}
 	public void setCategoria(int categoria) {
 		this.categoria = categoria;
+	}
+	public String getDirImagen() {
+		return dirImagen;
+	}
+	public void setDirImagen(String dirImagen) {
+		this.dirImagen = dirImagen;
+	}
+	public String getDirAudio() {
+		return dirAudio;
+	}
+	public void setDirAudio(String dirAudio) {
+		this.dirAudio = dirAudio;
 	}
 
 
