@@ -14,12 +14,6 @@ public class Pregunta {
 	private ArrayList<String> opciones = new ArrayList<String>();
 	private int respuesta;
 	private int categoria;
-<<<<<<< HEAD
-	/*public Pregunta(String pregunta, String opciones[],int respuesta,int categoria )
-	{
-		this
-	} */ 
-=======
 
 	public String getPregunta() {
 		return pregunta;
@@ -45,6 +39,6 @@ public class Pregunta {
 	public void setCategoria(int categoria) {
 		this.categoria = categoria;
 	}
->>>>>>> 20839c263af4cacd8114606fadd453c4017789d1
+
 
 }
