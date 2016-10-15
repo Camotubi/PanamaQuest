@@ -2,13 +2,14 @@ package interfaz;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import entidades.Jugador;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-		
+	
 		
 		int numJugadores;
 		
@@ -24,12 +25,18 @@ public class Main {
 		
 		for(int i =0; i<numJugadores ;i++)
 		{
-		  jugadores.add(i,JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1)));
-			
+		 String tempnom =(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1)));
+			jugadores.add(new Jugador(tempnom));
 		}
 		
-		System.out.println(jugadores);
-		
+		/* prueba de como imprime
+		for(int i =0; i<numJugadores;i++)
+		{
+			Jugador temph = jugadores.get(i);
+			System.out.println(temph.getNombre());
+			
+		}
+		*/
 		
 		
 	}
