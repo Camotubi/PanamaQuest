@@ -8,28 +8,20 @@ public class Jugador {
 	private String nombre;
 
 	private int comodines;  // 2 comodines por jugador
-	
+	private Pregunta preguntaRecibida;
 	
 	public Jugador(String nom)
 	{
 		nombre = nom;
 		comodines = 2;
 	}
-	
-	
 
-	private Pregunta preguntaRecibida;
-
-	
 	public double getDinero() {
 		return dinero;
 	}
 	public void setDinero(double dinero) {
 		this.dinero = dinero;
 	}
-	
-	
-
 	
 	public String getNombre() {
 		return nombre;
