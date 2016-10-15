@@ -9,9 +9,9 @@ public class Preguntador {
 	private ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
 	private ArrayList<Pregunta> preguntadeCategoriaActual = new ArrayList<Pregunta>();
 	private ArrayList<Integer> preguntasHechas = new ArrayList<Integer>();
-	private void agregarPregunta(String pregunta, String opciones[],int respuesta,int categoria )
+	private void agregarPregunta(String pregunta, String opciones[],int respuesta,int categoria,String dirImg,String dirAudio )
 	{
-		preguntas.add(new Pregunta(pregunta,new ArrayList<String>(Arrays.asList(opciones)),respuesta,categoria));
+		preguntas.add(new Pregunta(pregunta,new ArrayList<String>(Arrays.asList(opciones)),respuesta,categoria,dirImg,dirAudio));
 	}
 	
 	private void cambiarCategoria(int categoria)//extrae todas las preguntas
