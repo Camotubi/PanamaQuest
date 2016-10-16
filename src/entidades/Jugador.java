@@ -16,6 +16,7 @@ public class Jugador {
 	{};
 	public Jugador(String nom)
 	{
+		
 		nombre = nom;
 		comodines = 2;
 		
