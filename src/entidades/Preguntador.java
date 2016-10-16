@@ -44,7 +44,7 @@ public class Preguntador {
 				}
 			}
 		}while(pregRepetida);
-		
+		preguntasHechas.add(numeroRand);
 		return preguntadeCategoriaActual.get(numeroRand);
 	}
 }
