@@ -11,6 +11,8 @@ public class Jugador {
 	private boolean retirado = false;
 	private int contPregunta;
 	
+	public Jugador()
+	{};
 	public Jugador(String nom)
 	{
 		
