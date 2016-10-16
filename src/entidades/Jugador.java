@@ -10,10 +10,16 @@ public class Jugador {
 	private int comodines;  // 2 comodines por jugador
 	private Pregunta preguntaRecibida;
 	
+	private int contPregunta;
+	
+	public Jugador()
+	{};
 	public Jugador(String nom)
 	{
 		nombre = nom;
 		comodines = 2;
+		
+		contPregunta = 0;
 	}
 
 	public double getDinero() {
@@ -36,19 +42,38 @@ public class Jugador {
 		this.preguntaRecibida = preguntaRecibida;
 	}
 	
-	public boolean responderPregunta(int respuesta)
-	{
+	public int responderPregunta(int respuesta)
+	{	// return 1 respuesta correcta, 2 respuesta incorrecta, return 0 se retira
 		if(respuesta == preguntaRecibida.getRespuesta())
 		{
 			dinero = dinero +100;
-			return true;
+			contPregunta++;
+			return 1;
 		}
 		else
 		{
-			dinero = dinero -100;
-			return false;
+			if(respuesta == 0) // retiro
+			{
+				return 0;
+			}
+			else {
+			dinero = 0;  //dinero = dinero -100;  cambio #1 
+			contPregunta = 0;
+			return 2;
+			}
 		}
 		
 	}
+	
+	public int retiro()
+	{
+		return contPregunta;
+	}
+	
+	public void setComodines()
+	{
+		
+	}
+	
 
 }
