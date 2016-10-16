@@ -15,7 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-		Jugador jugadorAct = new Jugador();
+		Jugador jugadorAct ;
 		Preguntador preg = cargarPreguntas(new Preguntador());
 		int cantJugador;
 		int controlRespuesta =-1;
