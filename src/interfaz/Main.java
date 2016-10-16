@@ -17,21 +17,12 @@ public class Main {
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		Jugador jugadorAct = new Jugador();
 		Preguntador preg = cargarPreguntas(new Preguntador());
-		System.out.println("testasd"+preg.getPreguntas().get(0).getOpciones().size());
 		int cantJugador;
 		int controlRespuesta =-1;
 		int contadorPreguntas=1;
 		int turno=0;
 		int resp = 0;
 		int categoriaAct = 1;
-		
-		/*
-		 * -faltan respuestas para cuando salga pregunta
-			-faltan poner los comodines     done
-			- mensaje para ganadores
-			- cosas que se que se me estan olvidando
-		 * 
-		 */
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
 		cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
 		
@@ -42,10 +33,10 @@ public class Main {
 		}
 		preg.cambiarCategoria(1);
 		do {
-			if(contadorPreguntas>=10)
+			if(contadorPreguntas%10==0)
 			{
 				preg.cambiarCategoria(++categoriaAct);
-				contadorPreguntas = 0;
+				JOptionPane.showMessageDialog(null,categoriaAct);
 			}
 			do
 			{
@@ -54,12 +45,12 @@ public class Main {
 				jugadorAct = jugadores.get(turno);
 			}while(jugadorAct.isRetirado());
 			jugadorAct.setPreguntaRecibida(preg.preguntar());
+			resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas)));
 			contadorPreguntas++;
-			resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct)));
 			controlRespuesta = jugadorAct.responderPregunta(resp);
 			switch(controlRespuesta)
 			{
-			case 1: JOptionPane.showMessageDialog(null, "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta");	 break;
+			case 1: JOptionPane.showMessageDialog(null, "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta");break;
 			case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
 			case 3: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());break;
 			case 0: Jugador temph = jugadores.get(turno);
@@ -68,7 +59,7 @@ public class Main {
 
 			}
 			
-		}while((categoriaAct<3 || contadorPreguntas<10) );
+		}while((categoriaAct<3 || contadorPreguntas%10!=0) );
 		System.out.println("termine");
 	}
 
@@ -122,10 +113,10 @@ public class Main {
 		}
 		return preguntador;
 	}
-	public static String stringPregunta(Jugador jugador)
+	public static String stringPregunta(Jugador jugador,int contador)
 	{
 		StringBuilder strBuild = new StringBuilder();
-		strBuild.append("Turno de "+jugador.getNombre()+"\nLa pregunta es :"+jugador.getPreguntaRecibida().getPregunta()+"\n Opciones:");
+		strBuild.append("Turno de "+jugador.getNombre()+"         Dinero:" + jugador.getDinero()+"\nPregunta #"+contador+":" +jugador.getPreguntaRecibida().getPregunta()+"\n Opciones:");
 		
 		for(int i=0;i<jugador.getPreguntaRecibida().getOpciones().size();i++)
 		{
