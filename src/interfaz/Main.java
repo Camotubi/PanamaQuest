@@ -14,14 +14,22 @@ public class Main {
 	public static void main(String[] args) {
 		
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-		Jugador jugador = new Jugador();
+		Jugador jugadorAct = new Jugador();
 		Preguntador preg = new Preguntador();
 		cargarPreguntas(preg);
 		int numJugadores;
 		int controlRespuesta =-1;
 		int contadorPreguntas=0;
 		int turno;
+		int resp = 0;
 		
+		/*
+		 * -faltan respuestas para cuando salga pregunta
+			-faltan poner los comodines     done
+			- mensaje para ganadores
+			- cosas que se que se me estan olvidando
+		 * 
+		 */
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
 		
 		String temp=JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?");
@@ -40,23 +48,51 @@ public class Main {
 		// turno = (i+1)%numJugadores
 		do {
 			// que debo poner en respuestas ._.
-			int i =0; 
-			
+			int i =0; 			
 			turno = (i+1)%numJugadores;
+			jugadorAct = jugadores.get(turno);
 			preg.cambiarCategoria(1);
 			System.out.println("lala"+preg.getPreguntas().get(1).getPregunta());
-			jugadores.get(turno).setPreguntaRecibida(preg.getPreguntas().get(1));
-			int resp = Integer.parseInt(JOptionPane.showInputDialog(null,"Turno del jugador "+turno+"\nLa pregunta es :"+jugadores.get(turno).getPreguntaRecibida().getPregunta()+"\n Respuesta:\n1-"+jugadores.get(turno).getPreguntaRecibida().getOpciones().get(0)+" \n2- \n3- \n4- \n0-Retirarse"));
+			jugadorAct.setPreguntaRecibida(preg.getPreguntas().get(1));
 			contadorPreguntas++;
-			controlRespuesta = jugador.responderPregunta(resp);
-			switch(controlRespuesta)
+			controlRespuesta = jugadorAct.responderPregunta(resp);
+
+			Jugador usarComodines = jugadores.get(turno);
+			if(usarComodines.getComodines()!=0 )
 			{
-			case 1: JOptionPane.showMessageDialog(null, "Felicidades jugador "+turno+"la respuesta ha sido correcta");	 break;
-			case 2: JOptionPane.showMessageDialog(null, "Felicidades jugador "+turno+"la respuesta ha sido correcta");	 break;
-			case 0: Jugador temph = jugadores.get(turno);
-			JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
-			break;
+				int tempcom =Integer.parseInt(JOptionPane.showInputDialog(null,"Desea usar un comodin ? \n1-si \n2- no"));
+				switch(tempcom)
+				{
+				case 1: // hay que reducir las respuestas a 2, la correcta y una que no sea correcta
+					usarComodines.setComodines(1);
+					resp = Integer.parseInt(JOptionPane.showInputDialog(null,"Turno del jugador "+turno+"\nLa pregunta es :"+jugadores.get(turno).getPreguntaRecibida().getPregunta()+"\n Respuesta:\n1-"+jugadores.get(turno).getPreguntaRecibida().getOpciones().get(0)+" \n2- \n3- \n4- \n0-Retirarse"));
+					contadorPreguntas++;
+					controlRespuesta = jugadorAct.responderPregunta(resp);
+					break;
+				case 2:
+					resp = Integer.parseInt(JOptionPane.showInputDialog(null,"Turno del jugador "+turno+"\nLa pregunta es :"+jugadorAct.getPreguntaRecibida().getPregunta()+"\n Respuesta:\n1-"+jugadores.get(turno).getPreguntaRecibida().getOpciones().get(0)+" \n2- \n3- \n4- \n0-Retirarse"));
+					contadorPreguntas++;
+					controlRespuesta = jugadorAct.responderPregunta(resp);
+					break;
+				}
+				
 			}
+			
+			else {
+				resp = Integer.parseInt(JOptionPane.showInputDialog(null,"Turno del jugador "+turno+"\nLa pregunta es :"+jugadorAct.getPreguntaRecibida()+"\n Respuesta:\n1- \n2- \n3- \n4- \n0-Retirarse"));
+				contadorPreguntas++;
+				controlRespuesta = jugadorAct.responderPregunta(resp);
+				}
+				switch(controlRespuesta)
+				{
+				case 1: JOptionPane.showMessageDialog(null, "Felicidades jugador "+turno+"la respuesta ha sido correcta");	 break;
+				case 2: JOptionPane.showMessageDialog(null, "jugador "+turno+"su respuesta ha sido incorrecta");	 break;
+				case 0: Jugador temph = jugadores.get(turno);
+				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
+				break;
+
+				}
+			
 		}while(contadorPreguntas <10 && controlRespuesta !=0 );
 		
 		

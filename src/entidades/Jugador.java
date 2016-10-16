@@ -6,7 +6,6 @@ public class Jugador {
 	
 	private double dinero;
 	private String nombre;
-
 	private int comodines;  // 2 comodines por jugador
 	private Pregunta preguntaRecibida;
 	
@@ -16,6 +15,7 @@ public class Jugador {
 	{};
 	public Jugador(String nom)
 	{
+		
 		nombre = nom;
 		comodines = 2;
 		
@@ -70,9 +70,14 @@ public class Jugador {
 		return contPregunta;
 	}
 	
-	public void setComodines()
+	public void setComodines(int x)
 	{
-		
+		comodines = comodines-x;
+	}
+	
+	public int getComodines()
+	{
+		return comodines;
 	}
 	
 
