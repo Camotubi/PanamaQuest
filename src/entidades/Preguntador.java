@@ -9,25 +9,25 @@ public class Preguntador {
 	private ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
 	private ArrayList<Pregunta> preguntadeCategoriaActual = new ArrayList<Pregunta>();
 	private ArrayList<Integer> preguntasHechas = new ArrayList<Integer>();
-	private void agregarPregunta(String pregunta, String opciones[],int respuesta,int categoria,String dirImg,String dirAudio )
+	public void agregarPregunta(String pregunta, ArrayList<String> opciones,int respuesta,int categoria,String dirImg,String dirAudio )
 	{
-		preguntas.add(new Pregunta(pregunta,new ArrayList<String>(Arrays.asList(opciones)),respuesta,categoria,dirImg,dirAudio));
+		getPreguntas().add(new Pregunta(pregunta,opciones,respuesta,categoria,dirImg,dirAudio));
 	}
 	
-	private void cambiarCategoria(int categoria)//extrae todas las preguntas
+	public void cambiarCategoria(int categoria)//extrae todas las preguntas
 	{
 		preguntadeCategoriaActual.clear();
 		preguntasHechas.clear();
-		for(int i = 0; i<preguntas.size();i++)
+		for(int i = 0; i<getPreguntas().size();i++)
 		{
-			if(preguntas.get(i).getCategoria() == categoria)
+			if(getPreguntas().get(i).getCategoria() == categoria)
 			{
-				preguntadeCategoriaActual.add(preguntas.get(i));
+				preguntadeCategoriaActual.add(getPreguntas().get(i));
 			}
 		}
 	}
 	
-	private Pregunta preguntar()
+	public Pregunta preguntar()
 	{
 		Random generator = new Random();
 		int numeroRand ;
@@ -35,7 +35,7 @@ public class Preguntador {
 		do
 		{
 			numeroRand = generator.nextInt(preguntadeCategoriaActual.size());
-			for(int i=0; i<preguntadeCategoriaActual.size() && !pregRepetida;i++)
+			for(int i=0; i<preguntadeCategoriaActual.size() && !pregRepetida && preguntasHechas.size() !=0;i++)
 			{
 				
 				if(numeroRand == preguntasHechas.get(i))
@@ -46,5 +46,13 @@ public class Preguntador {
 		}while(pregRepetida);
 		preguntasHechas.add(numeroRand);
 		return preguntadeCategoriaActual.get(numeroRand);
+	}
+
+	public ArrayList<Pregunta> getPreguntas() {
+		return preguntas;
+	}
+
+	public void setPreguntas(ArrayList<Pregunta> preguntas) {
+		this.preguntas = preguntas;
 	}
 }
