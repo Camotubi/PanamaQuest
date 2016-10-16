@@ -6,9 +6,9 @@ public class Jugador {
 	
 	private double dinero;
 	private String nombre;
-	private int comodines;  // 2 comodines por jugador
+	private int comodin;  // 2 comodines por jugador
 	private Pregunta preguntaRecibida;
-	
+	private boolean retirado = false;
 	private int contPregunta;
 	
 	public Jugador()
@@ -17,7 +17,7 @@ public class Jugador {
 	{
 		
 		nombre = nom;
-		comodines = 2;
+		comodin = 2;
 		
 		contPregunta = 0;
 	}
@@ -44,7 +44,8 @@ public class Jugador {
 	
 	public int responderPregunta(int respuesta)
 	{	// return 1 respuesta correcta, 2 respuesta incorrecta, return 0 se retira
-		if(respuesta == preguntaRecibida.getRespuesta())
+		int respCorrecta =preguntaRecibida.getRespuesta();
+		if((respuesta-1) == respCorrecta)
 		{
 			dinero = dinero +100;
 			contPregunta++;
@@ -56,10 +57,20 @@ public class Jugador {
 			{
 				return 0;
 			}
-			else {
-			dinero = 0;  //dinero = dinero -100;  cambio #1 
-			contPregunta = 0;
-			return 2;
+			else 
+			{
+				if(respuesta == 10 && comodin >0)//uso de comodin
+				{
+					comodin--;
+					return 3;
+				}
+				else
+				{//incorrecta
+					dinero = 0;  
+					contPregunta = 0;
+					return 2;
+				}
+			
 			}
 		}
 		
@@ -70,14 +81,20 @@ public class Jugador {
 		return contPregunta;
 	}
 	
-	public void setComodines(int x)
+	public void setComodin(int x)
 	{
-		comodines = comodines-x;
+		comodin = comodin-x;
 	}
 	
-	public int getComodines()
+	public int getComodin()
 	{
-		return comodines;
+		return comodin;
+	}
+	public boolean isRetirado() {
+		return retirado;
+	}
+	public void setRetirado(boolean retirado) {
+		this.retirado = retirado;
 	}
 	
 

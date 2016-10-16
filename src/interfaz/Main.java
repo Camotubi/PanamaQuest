@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import entidades.Jugador;
+import entidades.Pregunta;
 import entidades.Preguntador;
 import entidades.Jugador;
 
@@ -15,13 +16,14 @@ public class Main {
 		
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		Jugador jugadorAct = new Jugador();
-		Preguntador preg = new Preguntador();
-		cargarPreguntas(preg);
-		int numJugadores;
+		Preguntador preg = cargarPreguntas(new Preguntador());
+		System.out.println("testasd"+preg.getPreguntas().get(0).getOpciones().size());
+		int cantJugador;
 		int controlRespuesta =-1;
-		int contadorPreguntas=0;
-		int turno;
+		int contadorPreguntas=1;
+		int turno=0;
 		int resp = 0;
+		int categoriaAct = 1;
 		
 		/*
 		 * -faltan respuestas para cuando salga pregunta
@@ -31,95 +33,54 @@ public class Main {
 		 * 
 		 */
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
+		cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
 		
-		String temp=JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?");
-		numJugadores = Integer.parseInt(temp);
-		
-		// JOptionPane.showInputDialog(null,"");
-		// JOptionPane.showMessageDialog(null, "");
-		
-		
-		for(int i =0; i<numJugadores ;i++)
+	
+		for(int i =0; i<cantJugador ;i++)
 		{
-		 String tempnom =(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1)));
-			jugadores.add(new Jugador(tempnom));
+			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
-		
-		// turno = (i+1)%numJugadores
+		preg.cambiarCategoria(1);
 		do {
-			// que debo poner en respuestas ._.
-			int i =0; 			
-			turno = (i+1)%numJugadores;
-			jugadorAct = jugadores.get(turno);
-			preg.cambiarCategoria(1);
-			System.out.println("lala"+preg.getPreguntas().get(1).getPregunta());
-			jugadorAct.setPreguntaRecibida(preg.getPreguntas().get(1));
-			contadorPreguntas++;
-			controlRespuesta = jugadorAct.responderPregunta(resp);
-
-			Jugador usarComodines = jugadores.get(turno);
-			if(usarComodines.getComodines()!=0 )
+			if(contadorPreguntas>=10)
 			{
-				int tempcom =Integer.parseInt(JOptionPane.showInputDialog(null,"Desea usar un comodin ? \n1-si \n2- no"));
-				switch(tempcom)
-				{
-				case 1: // hay que reducir las respuestas a 2, la correcta y una que no sea correcta
-					usarComodines.setComodines(1);
-					resp = Integer.parseInt(JOptionPane.showInputDialog(null,"Turno del jugador "+turno+"\nLa pregunta es :"+jugadores.get(turno).getPreguntaRecibida().getPregunta()+"\n Respuesta:\n1-"+jugadores.get(turno).getPreguntaRecibida().getOpciones().get(0)+" \n2- \n3- \n4- \n0-Retirarse"));
-					contadorPreguntas++;
-					controlRespuesta = jugadorAct.responderPregunta(resp);
-					break;
-				case 2:
-					resp = Integer.parseInt(JOptionPane.showInputDialog(null,"Turno del jugador "+turno+"\nLa pregunta es :"+jugadorAct.getPreguntaRecibida().getPregunta()+"\n Respuesta:\n1-"+jugadores.get(turno).getPreguntaRecibida().getOpciones().get(0)+" \n2- \n3- \n4- \n0-Retirarse"));
-					contadorPreguntas++;
-					controlRespuesta = jugadorAct.responderPregunta(resp);
-					break;
-				}
+				preg.cambiarCategoria(++categoriaAct);
+				contadorPreguntas = 0;
+			}
+			do
+			{
 				
+				turno = (turno+1)%cantJugador;
+				jugadorAct = jugadores.get(turno);
+			}while(jugadorAct.isRetirado());
+			jugadorAct.setPreguntaRecibida(preg.preguntar());
+			contadorPreguntas++;
+			resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct)));
+			controlRespuesta = jugadorAct.responderPregunta(resp);
+			switch(controlRespuesta)
+			{
+			case 1: JOptionPane.showMessageDialog(null, "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta");	 break;
+			case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
+			case 3: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());break;
+			case 0: Jugador temph = jugadores.get(turno);
+			JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
+			break;
+
 			}
 			
-			else {
-				resp = Integer.parseInt(JOptionPane.showInputDialog(null,"Turno del jugador "+turno+"\nLa pregunta es :"+jugadorAct.getPreguntaRecibida()+"\n Respuesta:\n1- \n2- \n3- \n4- \n0-Retirarse"));
-				contadorPreguntas++;
-				controlRespuesta = jugadorAct.responderPregunta(resp);
-				}
-				switch(controlRespuesta)
-				{
-				case 1: JOptionPane.showMessageDialog(null, "Felicidades jugador "+turno+"la respuesta ha sido correcta");	 break;
-				case 2: JOptionPane.showMessageDialog(null, "jugador "+turno+"su respuesta ha sido incorrecta");	 break;
-				case 0: Jugador temph = jugadores.get(turno);
-				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
-				break;
-
-				}
-			
-		}while(contadorPreguntas <10 && controlRespuesta !=0 );
-		
-		
-		/* prueba de como imprime
-		for(int i =0; i<numJugadores;i++)
-		{  
-			Jugador temph = jugadores.get(i);
-			System.out.println(temph.getNombre());
-			
-		}
-		*/
-		
-		
+		}while((categoriaAct<3 || contadorPreguntas<10) );
+		System.out.println("termine");
 	}
 
-	public static void cargarPreguntas(Preguntador preguntador)
-	{
-		
+	public static Preguntador cargarPreguntas(Preguntador preguntador)
+	{	
 		BufferedReader br = null;
-
 		try {
-
 			String sCurrentLine;
 			String tempPreg = null;
 			int tempRespIndex = 0;
-			int tempCat=0;
-			ArrayList<String> tempResp = new ArrayList<String>();
+			int tempCat=1;
+			ArrayList<String> tempOps = new ArrayList<String>();
 			br = new BufferedReader(new FileReader("C:\\Users\\Public\\test.txt"));
 
 			while ((sCurrentLine = br.readLine()) != null) {
@@ -135,16 +96,17 @@ public class Main {
 						
 				if(sCurrentLine.charAt(0) == '-')
 				{
-					tempResp.add(sCurrentLine.substring(1));
+					tempOps.add(sCurrentLine.substring(1));
 				}
 				else if(sCurrentLine.charAt(0) == '*')
 				{
-					tempResp.add(sCurrentLine.substring(1));
-					tempRespIndex =tempResp.size()-1;
+					tempOps.add(sCurrentLine.substring(1));
+					tempRespIndex =tempOps.size()-1;
 				}
 				if(sCurrentLine.charAt(0) == '=')
 				{
-					preguntador.agregarPregunta(tempPreg,tempResp,tempRespIndex,tempCat,"","");
+					preguntador.agregarPregunta(tempPreg,new ArrayList<String>(tempOps),tempRespIndex,tempCat,"","");
+					tempOps.clear();
 				}
 			}
 
@@ -158,5 +120,22 @@ public class Main {
 			}
 		
 		}
+		return preguntador;
+	}
+	public static String stringPregunta(Jugador jugador)
+	{
+		StringBuilder strBuild = new StringBuilder();
+		strBuild.append("Turno de "+jugador.getNombre()+"\nLa pregunta es :"+jugador.getPreguntaRecibida().getPregunta()+"\n Opciones:");
+		
+		for(int i=0;i<jugador.getPreguntaRecibida().getOpciones().size();i++)
+		{
+			strBuild.append("\n"+(i+1)+"-"+jugador.getPreguntaRecibida().getOpciones().get(i));
+		}
+		if(jugador.getComodin()>0)
+		{
+			strBuild.append("\n10-Usar comodin");
+		}
+		strBuild.append("\n0-Retirarse");
+		return strBuild.toString();
 	}
 }
