@@ -1,0 +1,188 @@
+Geografia
++¿Cual es el punto más alto de Panamá?
+*Volcan Barú
+-Cerro Fabrega
+-Cerro Azul
+-Cerro Campana
+	
++¿Como se llama esta localización? "mostrar imagen img/coiba.jpg"
+-Isla Taboga
+*Isla Coiba
+-Isla grande
+-Isla Contadora
+	
++¿Cual oceano esta localizado en la parte norte del Istmo de Panama?
+-Oceano Pacifico
+-Oceano Indico
+*Oceano Atlántico
+-Mar Caribe
+
++¿Cual hito en la frontera de Panamá y Colombia es el punto más oriental de Panamá?
+-Hito 2
+-Hito 1
+-Hito 7
+*Hito 10
+
++Donde queda el Parque Nacional Camino de Cruces?
+*Panamá
+-Coclé
+-Colón
+-Herrera
+
++Que tipo de bioma es el Parque Nacional Sarigua?
+-Desierto
+-Tundra
+*Albina
+-Sabana
+
++Que cordillera se encuentra en la frontera de Costa Rica y Panamá?
+*Cordillera de Talamanca
+-Cordillera Central
+-Cordillera de Los Andes
+-Cordillera de la Costa
+
++Donde esta localizado el Monumento a Goethals? "mostrar imagen del monumento"
+*Albrook
+-Clayton
+-Diablo
+-Corozal
+
++Cual es la comarca más grande en Panamá basada en el tamaño de su territorio?
+-Comarca Guna Yala
+-Comarca Emberá-Wounaan
+*Comarca Ngäbe-Buglé
+-Comarca Madugandí
+
++Cual es lago más grande de Panamá?
+-Lago Bayano
+-Lago Alajuela
+*Lago Gatún
+-Laguna de Chiriquí
+
+/
+Historia
++¿Cuándo se da la Guerra de Coto entre Panamá y Costa Rica?
+*Entre febrero y marzo de 1921
+-Entre enero y febrero de 1922
+-Entre abril y mayo 1923
+-Entre noviembre y diciembre de 1928
+
++¿Por qué se da la Guerra de Coto?
+-Por el oro en Panamá
+-Por el Fallo White
+*Porque no había una frontera entre Panamá y Costa Rica
+-Por la Guerra de los Mil Días. 
+
++De las siguientes, ¿qué era Belisario Porras?
+-Abogado
+-Militar
+-Profesor
+-Presidente
+-La ‘a’ y ‘d’
+-La ‘c’ y ‘d’
+*Todas las Anteriores
+
++Creador de la bandera nacional
+*Don Manuel Encarnacion Amador
+-Santos Jorge
+-Ricardo Perez
+-Sancho Panza
+
++Una de las damas encargadas de confeccionar la bandera de Panama
+*María Ossa de Amador
+-Mireya Moscoso	
+-Sandra Sandoval
+-Michelle Velazques
+
++Dia del grito de independencia
+-2 de noviembre de 1838
+-5 de enero de 1903
+*10 de noviembre de 1821
+-30 de octubre de 1822
+
++Dia de la separacion de Panama de Colombia
+-28 de noviembre de 1821
+*3 de noviembre de 1903
+-5 de julio de 1903
+-27 de noviembre de 1904
+
++Creador del escudo nacional
+*Don Nicanor Villalaz Lamela
+-Arnulfo Arias
+-José Antonio Remón Cantera
+-Jeronimo de la Ossa
+
++Creador de la musica del himno nacional
+-Federico Boyd
+-José Domingo de Obaldía
+*Don Santos Jorge
+-Sebastián Villalaz
+
++Dia de los Mártires
+-11 de enero de 1990
+-20 de octubre de 1983
+*9 de enero de 1964
+-4 de noviembre de 1903
+
+/
+Cultura
++Como se le conoce a Panama por la diversidad de razas que pueden ser encontradas en sus tierras?
+*Crisol de razas
+-Tierras Canaleras
+-Tierra de campeones
+-Agrupación de etnias
+
++Boxeador Panameño de renombre mundial conocido como el mas grande boxeador latinoamericano en toda la historia del boxeo
+*Roberto Durán
+-Eusebio Pedroza
+-Ismael Laguna
+-Ricardo "El Finito" López
+
++Vestido nacional de las mujeres panameñas
+*Pollera
+-El montuno
+-Camisilla blanca
+-La pollerilla
+
++Como se le llama a la moneda de 1 balboa?
+-La Dorada
+-El Balboa redondo
+*Martinelli
+-Cambio
+=
++Atleta ganador de la primera medalla olimpica de oro para Panamá
+*Irving Saladino
+-Lloyd La Beach
+-Alonso Edward
+-Carolena Carstens
+=
++Forma de arte textil hecha por la etnia Guna
+-Falda
+-Montuno
+*Mola
+-Polo
+=
++Una de las comidas tipica de Panamá es
+*Arroz con Pollo
+-Hamburguesa Angus
+-Tortilla
+-Pollo Frito
+=
++Baile tipico de Panamá
+-Breakdance
+-Polska
+-Dabbing
+*Tamborito
+=
++Instrumento tipico de Panamá
+-La flauta
+*La caja
+-La trompeta
+-La guitarra electrica
+=
++Uno de los escritores más famosos de Panamá
+-Gabriel Garcia Marquez
+-William Shakespeare
+*Ricardo Miró
+-Miguel de Cervantes Saavedra
+/
