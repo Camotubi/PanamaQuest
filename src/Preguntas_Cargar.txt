@@ -10,6 +10,7 @@ Geografia
 *Isla Coiba
 -Isla grande
 -Isla Contadora
+&Img/Coiba_mini.jpg
 =	
 +¿Cual oceano esta localizado en la parte norte del Istmo de Panama?
 -Oceano Pacifico
@@ -46,6 +47,7 @@ Geografia
 -Clayton
 -Diablo
 -Corozal
+&Img/Goethals.jpg
 =
 +Cual es la comarca más grande en Panamá basada en el tamaño de su territorio?
 -Comarca Guna Yala
@@ -162,7 +164,11 @@ Cultura
 *Mola
 -Polo
 =
+<<<<<<< HEAD
 +Una de las comidas tipica de Panamá es
+=======
++Una de las comidas tipica de Panamï¿½ esgo
+>>>>>>> 24a2dde14acaa6f5d1208df8c0d2850295158a57
 *Arroz con Pollo
 -Hamburguesa Angus
 -Tortilla
