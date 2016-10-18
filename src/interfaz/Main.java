@@ -13,8 +13,9 @@ import entidades.Jugador;
 public class Main {
 	
 	/*Cosas por hacer
-	 * Cuando los jugadores se retiran, no se retiran en verdad siguen saliendo en el juego ** WIP
-	 * Hacer que aparescan 2 preguntas cuando se usa el comodin  ** done by a good boi
+	 * evitar que las preguntas se repitan 
+	 * arreglar el mensaje de pregunta correcta
+	 * agregar pregunta de audio
 	 * 
 	 * */
 	
@@ -76,7 +77,8 @@ public class Main {
 				if(jugadorAct.isRetirado()) 
 				{
 					ctrlJugadoresRetidaros++;
-					if(ctrlJugadoresRetidaros< jugadores.size()) jugadoresDisponibles = false;
+					if(ctrlJugadoresRetidaros>= jugadores.size()) jugadoresDisponibles = false;
+
 				}
 			}while(jugadorAct.isRetirado() && jugadoresDisponibles);
 			if(jugadoresDisponibles)
@@ -86,7 +88,11 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
+
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
+
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " uso un comodin, le quedan " + jugadorAct.getComodin());
+
 					UsoComodin = true;
 					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
 				}
@@ -96,8 +102,8 @@ public class Main {
 				case 1: JOptionPane.showMessageDialog(null, "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta");break;
 				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
 				case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
-			
 				break;
+
 				case 0: Jugador temph = jugadores.get(turno);
 				temph.setRetirado(true);
 				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
