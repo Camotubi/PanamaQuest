@@ -30,6 +30,7 @@ public class Main {
 		int turno=0;
 		int resp = 0;
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura
+		
 		String categoriaTextual = null;
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
@@ -42,7 +43,10 @@ public class Main {
 		{
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
+		
+		
 		preg.cambiarCategoria(1);
+		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
 		do {
 			UsoComodin =false;  // inicializacion de los usos de comodin
 			if(contadorPreguntas%10==0)
