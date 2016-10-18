@@ -9,7 +9,7 @@ public class Preguntador {
 	private ArrayList<Pregunta> preguntas = new ArrayList<Pregunta>();
 	private ArrayList<Pregunta> preguntaCatAct = new ArrayList<Pregunta>();
 	private ArrayList<Integer> preguntasHechas = new ArrayList<Integer>();
-	public void agregarPregunta(String pregunta, ArrayList<String> opciones,int respuesta,int categoria,String dirImg,String dirAudio )
+	public void agregarPregunta(String pregunta, ArrayList<String> opciones,int respuesta,int categoria,String dirImg,String dirAudio)
 	{
 		
 		getPreguntas().add(new Pregunta(pregunta,opciones,respuesta,categoria,dirImg,dirAudio));
