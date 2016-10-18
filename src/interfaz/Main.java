@@ -89,7 +89,7 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
-					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usï¿½ un comodin, le quedan " + jugadorAct.getComodin());
 					UsoComodin = true;
 					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
 				}
@@ -98,7 +98,7 @@ public class Main {
 				{
 				case 1: JOptionPane.showMessageDialog(null,"Mensaje", "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta",JOptionPane.INFORMATION_MESSAGE);break;
 				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
-				case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
+				case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usï¿½ un comodin, le quedan " + jugadorAct.getComodin());
 			
 				break;
 				case 0: Jugador temph = jugadores.get(turno);
@@ -220,13 +220,35 @@ public class Main {
 			return strBuild.toString();
 	}
 	public static Integer mostrarPantallaPregunta(Jugador jugador,int contador,boolean usoComo){
+		Integer a=0, b=0;
+		boolean goodInput = false;
 		ImageIcon icon;
 		if(jugador.getPreguntaRecibida().getDirImagen() != "")
 		{
 			System.out.println(jugador.getPreguntaRecibida().getDirImagen());
 			icon = new ImageIcon(Main.class.getClassLoader().getResource(jugador.getPreguntaRecibida().getDirImagen()));
-			return Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
+			do{
+				try{
+					a = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
+					goodInput=true;
+					}
+				catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Inserte un nÃºmero porfavor.");
+					}
+				}while(!goodInput);
+			return a;
 		}
-		else return Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo)));
+		else{
+			do{
+				try{
+					b = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo)));
+					goodInput=true;
+					}
+					catch(NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null, "Inserte un nÃºmero porfavor.");
+					}
+				}while(!goodInput);
+			return b;
+			} 
 	}
 }
