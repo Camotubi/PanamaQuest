@@ -21,6 +21,10 @@ public class Jugador {
 		
 		contPregunta = 0;
 	}
+	
+	public int getcontPregunta(){
+		return contPregunta;
+	}
 
 	public double getDinero() {
 		return dinero;
