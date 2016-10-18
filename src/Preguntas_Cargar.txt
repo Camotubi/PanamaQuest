@@ -1,4 +1,4 @@
-Geografia
+﻿Geografia
 +�Cual es el punto m�s alto de Panam�?
 *Volcan Bar�
 -Cerro Fabrega
@@ -47,6 +47,7 @@ Geografia
 -Clayton
 -Diablo
 -Corozal
+&Img/Goethals.jpg
 =
 +Cual es la comarca m�s grande en Panam� basada en el tama�o de su territorio?
 -Comarca Guna Yala
@@ -163,7 +164,7 @@ Cultura
 *Mola
 -Polo
 =
-+Una de las comidas tipica de Panam� es
++Una de las comidas tipica de Panam� esgo
 *Arroz con Pollo
 -Hamburguesa Angus
 -Tortilla
