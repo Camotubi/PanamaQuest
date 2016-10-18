@@ -29,7 +29,8 @@ public class Main {
 		int contadorPreguntas=1;
 		int turno=0;
 		int resp = 0;
-		int categoriaAct = 1;
+		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura
+		String categoriaTextual = null;
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
 		int ctrlJugadoresRetidaros = 0;
@@ -47,7 +48,19 @@ public class Main {
 			if(contadorPreguntas%10==0)
 			{
 				preg.cambiarCategoria(++categoriaAct);
-				JOptionPane.showMessageDialog(null,categoriaAct);
+				switch(categoriaAct)
+				{
+				case 1 : 
+					categoriaTextual = "Geografia";
+					break;
+				case 2:
+					categoriaTextual = "Historia";
+					break;
+				case 3:
+					categoriaTextual = "Cultura";
+					break;
+				}
+				JOptionPane.showMessageDialog(null,categoriaTextual);
 			}
 			ctrlJugadoresRetidaros = 0;
 			do
