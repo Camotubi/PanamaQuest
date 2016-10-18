@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 import entidades.Jugador;
 import entidades.Pregunta;
 import entidades.Preguntador;
-import entidades.Jugador;
 
 public class Main {
 	
@@ -28,7 +28,7 @@ public class Main {
 		Jugador jugadorAct ;
 		Preguntador preg = cargarPreguntas(new Preguntador());
 		
-		int cantJugador;
+		int cantJugador=0;
 		int controlRespuesta =-1;
 		int contadorPreguntas=1;
 		int turno=0;
@@ -38,16 +38,26 @@ public class Main {
 		String categoriaTextual = null;
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
+		boolean goodInput=false;
 		int ctrlJugadoresRetidaros = 0;
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
-		cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
-		
+		do{
+			try{
+			cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
+			goodInput=true;
+			}
+			catch(NumberFormatException nfe){
+				JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+			}
+		}while(!goodInput);
 	
 		for(int i =0; i<cantJugador ;i++)
 		{
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
-		
+		for(int i=0; i<jugadores.size(); i++){
+			JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			}
 		
 		preg.cambiarCategoria(1);
 		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
@@ -91,24 +101,27 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
-					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " uso un comodin, le quedan " + jugadorAct.getComodin());
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
 					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
 				}
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				switch(controlRespuesta)
 				{
-				case 1: JOptionPane.showMessageDialog(null,"Mensaje", "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta",JOptionPane.INFORMATION_MESSAGE);break;
-				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
+				case 1: JOptionPane.showMessageDialog(null,"GENIAL!!! " + jugadorAct.getNombre()+ "  la respuesta ha sido correcta.");break;
+				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+" su respuesta ha sido incorrecta");break;
 				case 0: Jugador temph = jugadores.get(turno);
 				temph.setRetirado(true);
-				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
+				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro. \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
 				break;
 	
 				}
 				contadorPreguntas++;
 			}
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
+		/*for(int i=0; i<jugadores.size(); i++){
+		JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+		}*/
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
