@@ -31,6 +31,8 @@ public class Main {
 		int resp = 0;
 		int categoriaAct = 1;
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
+		boolean jugadoresDisponibles = true;
+		int ctrlJugadoresRetidaros = 0;
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
 		cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
 		
@@ -47,37 +49,47 @@ public class Main {
 				preg.cambiarCategoria(++categoriaAct);
 				JOptionPane.showMessageDialog(null,categoriaAct);
 			}
+			ctrlJugadoresRetidaros = 0;
 			do
 			{
 				
 				turno = (turno+1)%cantJugador;
 				jugadorAct = jugadores.get(turno);
-			}while(jugadorAct.isRetirado());
-			jugadorAct.setPreguntaRecibida(preg.preguntar());
-			resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
-			contadorPreguntas++;
-			controlRespuesta = jugadorAct.responderPregunta(resp);
-			if(resp == 10) // alternativa si decide usar el   comodin 
+				System.out.println(ctrlJugadoresRetidaros);
+				if(jugadorAct.isRetirado()) 
+				{
+					ctrlJugadoresRetidaros++;
+					if(ctrlJugadoresRetidaros< jugadores.size()) jugadoresDisponibles = false;
+				}
+			}while(jugadorAct.isRetirado() && jugadoresDisponibles);
+			if(jugadoresDisponibles)
 			{
-				JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
-				UsoComodin = true;
+				jugadorAct.setPreguntaRecibida(preg.preguntar());
 				resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
-			}
-			controlRespuesta = jugadorAct.responderPregunta(resp);
-			switch(controlRespuesta)
-			{
-			case 1: JOptionPane.showMessageDialog(null, "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta");break;
-			case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
-			case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
-		
-			break;
-			case 0: Jugador temph = jugadores.get(turno);
-			JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
-			break;
-
-			}
+				controlRespuesta = jugadorAct.responderPregunta(resp);
+				if(resp == 10) // alternativa si decide usar el   comodin 
+				{
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
+					UsoComodin = true;
+					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
+				}
+				controlRespuesta = jugadorAct.responderPregunta(resp);
+				switch(controlRespuesta)
+				{
+				case 1: JOptionPane.showMessageDialog(null, "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta");break;
+				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
+				case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
 			
-		}while((categoriaAct<3 || contadorPreguntas%10!=0) );
+				break;
+				case 0: Jugador temph = jugadores.get(turno);
+				temph.setRetirado(true);
+				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
+				break;
+	
+				}
+				contadorPreguntas++;
+			}
+		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
 		System.out.println("termine");
 	}
 
