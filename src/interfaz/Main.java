@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 import entidades.Jugador;
 import entidades.Pregunta;
 import entidades.Preguntador;
-import entidades.Jugador;
 
 public class Main {
 	
@@ -26,7 +26,7 @@ public class Main {
 		Jugador jugadorAct ;
 		Preguntador preg = cargarPreguntas(new Preguntador());
 		
-		int cantJugador;
+		int cantJugador=0;
 		int controlRespuesta =-1;
 		int contadorPreguntas=1;
 		int turno=0;
@@ -36,10 +36,18 @@ public class Main {
 		String categoriaTextual = null;
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
+		boolean goodInput=false;
 		int ctrlJugadoresRetidaros = 0;
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
-		cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
-		
+		do{
+			try{
+			cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
+			goodInput=true;
+			}
+			catch(NumberFormatException nfe){
+				JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+			}
+		}while(!goodInput);
 	
 		for(int i =0; i<cantJugador ;i++)
 		{
