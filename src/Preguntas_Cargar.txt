@@ -164,11 +164,7 @@ Cultura
 *Mola
 -Polo
 =
-<<<<<<< HEAD
 +Una de las comidas tipica de Panamá es
-=======
-+Una de las comidas tipica de Panamï¿½ esgo
->>>>>>> 24a2dde14acaa6f5d1208df8c0d2850295158a57
 *Arroz con Pollo
 -Hamburguesa Angus
 -Tortilla

@@ -47,7 +47,7 @@ public class Main {
 			goodInput=true;
 			}
 			catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(null, "Inserte un nÃºmero porfavor.");
+				JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
 			}
 		}while(!goodInput);
 	
@@ -99,7 +99,7 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
-					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " uso un comodin, le quedan " + jugadorAct.getComodin());
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
 					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
 					
@@ -107,11 +107,11 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				switch(controlRespuesta)
 				{
-				case 1: JOptionPane.showMessageDialog(null,"Mensaje", "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta",JOptionPane.INFORMATION_MESSAGE);break;
-				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
+				case 1: JOptionPane.showMessageDialog(null,"GENIAL!!! " + jugadorAct.getNombre()+ "  la respuesta ha sido correcta.");break;
+				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+" su respuesta ha sido incorrecta");break;
 				case 0: Jugador temph = jugadores.get(turno);
 				temph.setRetirado(true);
-				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
+				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro. \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
 				break;
 	
 				}
