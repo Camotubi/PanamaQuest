@@ -1,33 +1,33 @@
-ï»¿Geografia
-+ï¿½Cual es el punto mï¿½s alto de Panamï¿½?
-*Volcan Barï¿½
+Geografia
++¿Cual es el punto más alto de Panamá?
+*Volcan Barú
 -Cerro Fabrega
 -Cerro Azul
 -Cerro Campana
 =	
-+ï¿½Como se llama esta localizaciï¿½n?
++¿Como se llama esta localización? "mostrar imagen img/coiba.jpg"
 -Isla Taboga
 *Isla Coiba
 -Isla grande
 -Isla Contadora
 &Img/Coiba_mini.jpg
 =	
-+ï¿½Cual oceano esta localizado en la parte norte del Istmo de Panama?
++¿Cual oceano esta localizado en la parte norte del Istmo de Panama?
 -Oceano Pacifico
 -Oceano Indico
-*Oceano Atlï¿½ntico
+*Oceano Atlántico
 -Mar Caribe
 =
-+ï¿½Cual hito en la frontera de Panamï¿½ y Colombia es el punto mï¿½s oriental de Panamï¿½?
++¿Cual hito en la frontera de Panamá y Colombia es el punto más oriental de Panamá?
 -Hito 2
 -Hito 1
 -Hito 7
 *Hito 10
 =
 +Donde queda el Parque Nacional Camino de Cruces?
-*Panamï¿½
--Coclï¿½
--Colï¿½n
+*Panamá
+-Coclé
+-Colón
 -Herrera
 =
 +Que tipo de bioma es el Parque Nacional Sarigua?
@@ -36,7 +36,7 @@
 *Albina
 -Sabana
 =
-+Que cordillera se encuentra en la frontera de Costa Rica y Panamï¿½?
++Que cordillera se encuentra en la frontera de Costa Rica y Panamá?
 *Cordillera de Talamanca
 -Cordillera Central
 -Cordillera de Los Andes
@@ -49,39 +49,39 @@
 -Corozal
 &Img/Goethals.jpg
 =
-+Cual es la comarca mï¿½s grande en Panamï¿½ basada en el tamaï¿½o de su territorio?
++Cual es la comarca más grande en Panamá basada en el tamaño de su territorio?
 -Comarca Guna Yala
--Comarca Emberï¿½-Wounaan
-*Comarca Ngï¿½be-Buglï¿½
--Comarca Madugandï¿½
+-Comarca Emberá-Wounaan
+*Comarca Ngäbe-Buglé
+-Comarca Madugandí
 =
-+Cual es lago mï¿½s grande de Panamï¿½?
++Cual es lago más grande de Panamá?
 -Lago Bayano
 -Lago Alajuela
-*Lago Gatï¿½n
--Laguna de Chiriquï¿½
+*Lago Gatún
+-Laguna de Chiriquí
 =
 /
 Historia
-+ï¿½Cuï¿½ndo se da la Guerra de Coto entre Panamï¿½ y Costa Rica?
++¿Cuándo se da la Guerra de Coto entre Panamá y Costa Rica?
 *Entre febrero y marzo de 1921
 -Entre enero y febrero de 1922
 -Entre abril y mayo 1923
 -Entre noviembre y diciembre de 1928
 =
-+ï¿½Por quï¿½ se da la Guerra de Coto?
--Por el oro en Panamï¿½
++¿Por qué se da la Guerra de Coto?
+-Por el oro en Panamá
 -Por el Fallo White
-*Porque no habï¿½a una frontera entre Panamï¿½ y Costa Rica
--Por la Guerra de los Mil Dï¿½as. 
+*Porque no había una frontera entre Panamá y Costa Rica
+-Por la Guerra de los Mil Días. 
 =
-+De las siguientes, ï¿½quï¿½ era Belisario Porras?
++De las siguientes, ¿qué era Belisario Porras?
 -Abogado
 -Militar
 -Profesor
 -Presidente
--La ï¿½aï¿½ y ï¿½dï¿½
--La ï¿½cï¿½ y ï¿½dï¿½
+-La ‘a’ y ‘d’
+-La ‘c’ y ‘d’
 *Todas las Anteriores
 =
 +Creador de la bandera nacional
@@ -91,7 +91,7 @@ Historia
 -Sancho Panza
 =
 +Una de las damas encargadas de confeccionar la bandera de Panama
-*Marï¿½a Ossa de Amador
+*María Ossa de Amador
 -Mireya Moscoso	
 -Sandra Sandoval
 -Michelle Velazques
@@ -111,16 +111,16 @@ Historia
 +Creador del escudo nacional
 *Don Nicanor Villalaz Lamela
 -Arnulfo Arias
--Josï¿½ Antonio Remï¿½n Cantera
+-José Antonio Remón Cantera
 -Jeronimo de la Ossa
 =
 +Creador de la musica del himno nacional
 -Federico Boyd
--Josï¿½ Domingo de Obaldï¿½a
+-José Domingo de Obaldía
 *Don Santos Jorge
--Sebastiï¿½n Villalaz
+-Sebastián Villalaz
 =
-+Dia de los Mï¿½rtires
++Dia de los Mártires
 -11 de enero de 1990
 -20 de octubre de 1983
 *9 de enero de 1964
@@ -132,15 +132,15 @@ Cultura
 *Crisol de razas
 -Tierras Canaleras
 -Tierra de campeones
--Agrupaciï¿½n de etnias
+-Agrupación de etnias
 =
-+Boxeador Panameï¿½o de renombre mundial conocido como el mas grande boxeador latinoamericano en toda la historia del boxeo
-*Roberto Durï¿½n
++Boxeador Panameño de renombre mundial conocido como el mas grande boxeador latinoamericano en toda la historia del boxeo
+*Roberto Durán
 -Eusebio Pedroza
 -Ismael Laguna
--Ricardo "El Finito" Lï¿½pez
+-Ricardo "El Finito" López
 =
-+Vestido nacional de las mujeres panameï¿½as
++Vestido nacional de las mujeres panameñas
 *Pollera
 -El montuno
 -Camisilla blanca
@@ -152,7 +152,7 @@ Cultura
 *Martinelli
 -Cambio
 =
-+Atleta ganador de la primera medalla olimpica de oro para Panamï¿½
++Atleta ganador de la primera medalla olimpica de oro para Panamá
 *Irving Saladino
 -Lloyd La Beach
 -Alonso Edward
@@ -164,27 +164,31 @@ Cultura
 *Mola
 -Polo
 =
+<<<<<<< HEAD
++Una de las comidas tipica de Panamá es
+=======
 +Una de las comidas tipica de Panamï¿½ esgo
+>>>>>>> 24a2dde14acaa6f5d1208df8c0d2850295158a57
 *Arroz con Pollo
 -Hamburguesa Angus
 -Tortilla
 -Pollo Frito
 =
-+Baile tipico de Panamï¿½
++Baile tipico de Panamá
 -Breakdance
 -Polska
 -Dabbing
 *Tamborito
 =
-+Instrumento tipico de Panamï¿½
++Instrumento tipico de Panamá
 -La flauta
 *La caja
 -La trompeta
 -La guitarra electrica
 =
-+Uno de los escritores mï¿½s famosos de Panamï¿½
++Uno de los escritores más famosos de Panamá
 -Gabriel Garcia Marquez
 -William Shakespeare
-*Ricardo Mirï¿½
+*Ricardo Miró
 -Miguel de Cervantes Saavedra
 /
