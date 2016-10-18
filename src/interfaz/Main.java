@@ -76,7 +76,6 @@ public class Main {
 				
 				turno = (turno+1)%cantJugador;
 				jugadorAct = jugadores.get(turno);
-				System.out.println(ctrlJugadoresRetidaros);
 				if(jugadorAct.isRetirado()) 
 				{
 					ctrlJugadoresRetidaros++;
@@ -110,14 +109,12 @@ public class Main {
 				contadorPreguntas++;
 			}
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
-		System.out.println("termine");
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
 	{	
 		BufferedReader br = null;
 		try {
-			int conttemp = 0; // pruebas para reducir opciones
 			ClassLoader cl = Main.class.getClassLoader();
 			String sCurrentLine;
 			String tempPreg = null;
@@ -133,7 +130,6 @@ public class Main {
 				{
 					tempCat++;
 				}
-				System.out.println(sCurrentLine);
 				if((sCurrentLine.charAt(0)=='+'))
 				{
 					tempPreg = sCurrentLine.substring(1);
@@ -225,7 +221,6 @@ public class Main {
 		ImageIcon icon;
 		if(jugador.getPreguntaRecibida().getDirImagen() != "")
 		{
-			System.out.println(jugador.getPreguntaRecibida().getDirImagen());
 			icon = new ImageIcon(Main.class.getClassLoader().getResource(jugador.getPreguntaRecibida().getDirImagen()));
 			do{
 				try{
@@ -233,7 +228,7 @@ public class Main {
 					goodInput=true;
 					}
 				catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+					JOptionPane.showMessageDialog(null, "Inserte un numero porfavor.");
 					}
 				}while(!goodInput);
 			return a;
@@ -245,7 +240,7 @@ public class Main {
 					goodInput=true;
 					}
 					catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+					JOptionPane.showMessageDialog(null, "Inserte un numero porfavor.");
 					}
 				}while(!goodInput);
 			return b;
