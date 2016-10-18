@@ -55,9 +55,6 @@ public class Main {
 		{
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
-		for(int i=0; i<jugadores.size(); i++){
-			JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
-			}
 		
 		preg.cambiarCategoria(1);
 		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
@@ -98,12 +95,14 @@ public class Main {
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
 				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas, UsoComodin);
+				if(resp == -1) break;
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " uso un comodin, le quedan " + jugadorAct.getComodin());
 					UsoComodin = true;
 					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
+					
 				}
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				switch(controlRespuesta)
@@ -119,9 +118,9 @@ public class Main {
 				contadorPreguntas++;
 			}
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
-		/*for(int i=0; i<jugadores.size(); i++){
-		JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
-		}*/
+		for(int i=0; i<jugadores.size(); i++){
+			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			}
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
@@ -213,6 +212,7 @@ public class Main {
 			
 		
 			strBuild.append("\n0-Retirarse");
+			strBuild.append("\n-1-Salir del juego");
 		}
 		else {
 			for(int i=0;i<jugador.getPreguntaRecibida().getOpciones().size();i++)
@@ -225,6 +225,7 @@ public class Main {
 				
 			}
 			strBuild.append("\n0-Retirarse");
+			strBuild.append("\n-1-Salir del juego");
 		}
 			return strBuild.toString();
 	}
