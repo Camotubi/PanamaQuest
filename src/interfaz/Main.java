@@ -15,8 +15,9 @@ import entidades.Preguntador;
 public class Main {
 	
 	/*Cosas por hacer
-	 * Cuando los jugadores se retiran, no se retiran en verdad siguen saliendo en el juego ** WIP
-	 * Hacer que aparescan 2 preguntas cuando se usa el comodin  ** done by a good boi
+	 * evitar que las preguntas se repitan 
+	 * arreglar el mensaje de pregunta correcta
+	 * agregar pregunta de audio
 	 * 
 	 * */
 	
@@ -83,11 +84,11 @@ public class Main {
 				
 				turno = (turno+1)%cantJugador;
 				jugadorAct = jugadores.get(turno);
-				System.out.println(ctrlJugadoresRetidaros);
 				if(jugadorAct.isRetirado()) 
 				{
 					ctrlJugadoresRetidaros++;
-					if(ctrlJugadoresRetidaros< jugadores.size()) jugadoresDisponibles = false;
+					if(ctrlJugadoresRetidaros>= jugadores.size()) jugadoresDisponibles = false;
+
 				}
 			}while(jugadorAct.isRetirado() && jugadoresDisponibles);
 			if(jugadoresDisponibles)
@@ -98,7 +99,7 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
-					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " us� un comodin, le quedan " + jugadorAct.getComodin());
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " uso un comodin, le quedan " + jugadorAct.getComodin());
 					UsoComodin = true;
 					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
 				}
@@ -107,9 +108,6 @@ public class Main {
 				{
 				case 1: JOptionPane.showMessageDialog(null,"Mensaje", "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta",JOptionPane.INFORMATION_MESSAGE);break;
 				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
-				case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " us� un comodin, le quedan " + jugadorAct.getComodin());
-			
-				break;
 				case 0: Jugador temph = jugadores.get(turno);
 				temph.setRetirado(true);
 				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
@@ -119,14 +117,12 @@ public class Main {
 				contadorPreguntas++;
 			}
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
-		System.out.println("termine");
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
 	{	
 		BufferedReader br = null;
 		try {
-			int conttemp = 0; // pruebas para reducir opciones
 			ClassLoader cl = Main.class.getClassLoader();
 			String sCurrentLine;
 			String tempPreg = null;
@@ -142,7 +138,6 @@ public class Main {
 				{
 					tempCat++;
 				}
-				System.out.println(sCurrentLine);
 				if((sCurrentLine.charAt(0)=='+'))
 				{
 					tempPreg = sCurrentLine.substring(1);
@@ -234,7 +229,6 @@ public class Main {
 		ImageIcon icon;
 		if(jugador.getPreguntaRecibida().getDirImagen() != "")
 		{
-			System.out.println(jugador.getPreguntaRecibida().getDirImagen());
 			icon = new ImageIcon(Main.class.getClassLoader().getResource(jugador.getPreguntaRecibida().getDirImagen()));
 			do{
 				try{
@@ -242,7 +236,7 @@ public class Main {
 					goodInput=true;
 					}
 				catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+					JOptionPane.showMessageDialog(null, "Inserte un numero porfavor.");
 					}
 				}while(!goodInput);
 			return a;
@@ -254,7 +248,7 @@ public class Main {
 					goodInput=true;
 					}
 					catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+					JOptionPane.showMessageDialog(null, "Inserte un numero porfavor.");
 					}
 				}while(!goodInput);
 			return b;
