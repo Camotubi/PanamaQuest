@@ -2,6 +2,7 @@ package interfaz;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -126,7 +127,7 @@ public class Main {
 			String tempDirImg="";
 			String tempDirAudio="";
 			ArrayList<String> tempOps = new ArrayList<String>();
-			br = new BufferedReader(new FileReader( cl.getResource("Preguntas_Cargar.txt").getPath()));
+			br = new BufferedReader(new InputStreamReader(cl.getResourceAsStream("Preguntas_Cargar.txt")));
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				if(sCurrentLine.charAt(0)=='/')
