@@ -55,7 +55,9 @@ public class Main {
 		{
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
-		
+		for(int i=0; i<jugadores.size(); i++){
+			JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			}
 		
 		preg.cambiarCategoria(1);
 		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
@@ -117,6 +119,9 @@ public class Main {
 				contadorPreguntas++;
 			}
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
+		/*for(int i=0; i<jugadores.size(); i++){
+		JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+		}*/
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
