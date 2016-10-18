@@ -2,10 +2,8 @@ package interfaz;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import entidades.Jugador;
 import entidades.Pregunta;
@@ -26,14 +24,13 @@ public class Main {
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		Jugador jugadorAct ;
 		Preguntador preg = cargarPreguntas(new Preguntador());
-		
 		int cantJugador;
 		int controlRespuesta =-1;
 		int contadorPreguntas=1;
 		int turno=0;
 		int resp = 0;
-
-		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
+		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura
+		
 		String categoriaTextual = null;
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
@@ -85,21 +82,20 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
-				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
-				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas, UsoComodin);
+				resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
-					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usï¿½ un comodin, le quedan " + jugadorAct.getComodin());
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
 					UsoComodin = true;
 					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
 				}
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				switch(controlRespuesta)
 				{
-				case 1: JOptionPane.showMessageDialog(null,"Mensaje", "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta",JOptionPane.INFORMATION_MESSAGE);break;
+				case 1: JOptionPane.showMessageDialog(null, "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta");break;
 				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
-				case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usï¿½ un comodin, le quedan " + jugadorAct.getComodin());
+				case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
 			
 				break;
 				case 0: Jugador temph = jugadores.get(turno);
@@ -118,16 +114,14 @@ public class Main {
 	{	
 		BufferedReader br = null;
 		try {
-			int conttemp = 0; // pruebas para reducir opciones
-			ClassLoader cl = Main.class.getClassLoader();
+			
+			
 			String sCurrentLine;
 			String tempPreg = null;
 			int tempRespIndex = 0;
 			int tempCat=1;
-			String tempDirImg="";
-			String tempDirAudio="";
 			ArrayList<String> tempOps = new ArrayList<String>();
-			br = new BufferedReader(new InputStreamReader(cl.getResourceAsStream("Preguntas_Cargar.txt")));
+			br = new BufferedReader(new FileReader("C:\\Users\\Public\\test.txt"));
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				if(sCurrentLine.charAt(0)=='/')
@@ -139,10 +133,7 @@ public class Main {
 				{
 					tempPreg = sCurrentLine.substring(1);
 				}
-				if((sCurrentLine.charAt(0)=='&'))
-				{
-					tempDirImg = sCurrentLine.substring(1);
-				}
+						
 				if(sCurrentLine.charAt(0) == '-')
 				{
 					tempOps.add(sCurrentLine.substring(1));
@@ -154,9 +145,8 @@ public class Main {
 				}
 				if(sCurrentLine.charAt(0) == '=')
 				{
-					preguntador.agregarPregunta(tempPreg,new ArrayList<String>(tempOps),tempRespIndex,tempCat,tempDirImg,tempDirAudio);
+					preguntador.agregarPregunta(tempPreg,new ArrayList<String>(tempOps),tempRespIndex,tempCat,"","");
 					tempOps.clear();
-					tempDirImg ="";
 				}
 			}
 
@@ -219,37 +209,5 @@ public class Main {
 			strBuild.append("\n0-Retirarse");
 		}
 			return strBuild.toString();
-	}
-	public static Integer mostrarPantallaPregunta(Jugador jugador,int contador,boolean usoComo){
-		Integer a=0, b=0;
-		boolean goodInput = false;
-		ImageIcon icon;
-		if(jugador.getPreguntaRecibida().getDirImagen() != "")
-		{
-			System.out.println(jugador.getPreguntaRecibida().getDirImagen());
-			icon = new ImageIcon(Main.class.getClassLoader().getResource(jugador.getPreguntaRecibida().getDirImagen()));
-			do{
-				try{
-					a = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
-					goodInput=true;
-					}
-				catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un nÃºmero porfavor.");
-					}
-				}while(!goodInput);
-			return a;
-		}
-		else{
-			do{
-				try{
-					b = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo)));
-					goodInput=true;
-					}
-					catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un nÃºmero porfavor.");
-					}
-				}while(!goodInput);
-			return b;
-			} 
 	}
 }
