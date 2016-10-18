@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import entidades.Jugador;
 import entidades.Pregunta;
@@ -24,12 +25,15 @@ public class Main {
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		Jugador jugadorAct ;
 		Preguntador preg = cargarPreguntas(new Preguntador());
+		
 		int cantJugador;
 		int controlRespuesta =-1;
 		int contadorPreguntas=1;
 		int turno=0;
 		int resp = 0;
 		int categoriaAct = 1;
+		ImageIcon icon = new ImageIcon("C:\\Users\\Public\\Coiba_mini.jpg");
+
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
 		int ctrlJugadoresRetidaros = 0;
@@ -65,7 +69,8 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
-				resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
+				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
+				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas, UsoComodin);
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
@@ -76,7 +81,7 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				switch(controlRespuesta)
 				{
-				case 1: JOptionPane.showMessageDialog(null, "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta");break;
+				case 1: JOptionPane.showMessageDialog(null,"Mensaje", "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta",JOptionPane.INFORMATION_MESSAGE);break;
 				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");break;
 				case 3: //JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " usó un comodin, le quedan " + jugadorAct.getComodin());
 			
@@ -98,13 +103,15 @@ public class Main {
 		BufferedReader br = null;
 		try {
 			int conttemp = 0; // pruebas para reducir opciones
-			
+			ClassLoader cl = Main.class.getClassLoader();
 			String sCurrentLine;
 			String tempPreg = null;
 			int tempRespIndex = 0;
 			int tempCat=1;
+			String tempDirImg="";
+			String tempDirAudio="";
 			ArrayList<String> tempOps = new ArrayList<String>();
-			br = new BufferedReader(new FileReader("C:\\Users\\Public\\test.txt"));
+			br = new BufferedReader(new FileReader( cl.getResource("Preguntas_Cargar.txt").getPath()));
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				if(sCurrentLine.charAt(0)=='/')
@@ -116,7 +123,10 @@ public class Main {
 				{
 					tempPreg = sCurrentLine.substring(1);
 				}
-						
+				if((sCurrentLine.charAt(0)=='&'))
+				{
+					tempDirImg = sCurrentLine.substring(1);
+				}
 				if(sCurrentLine.charAt(0) == '-')
 				{
 					tempOps.add(sCurrentLine.substring(1));
@@ -128,8 +138,9 @@ public class Main {
 				}
 				if(sCurrentLine.charAt(0) == '=')
 				{
-					preguntador.agregarPregunta(tempPreg,new ArrayList<String>(tempOps),tempRespIndex,tempCat,"","");
+					preguntador.agregarPregunta(tempPreg,new ArrayList<String>(tempOps),tempRespIndex,tempCat,tempDirImg,tempDirAudio);
 					tempOps.clear();
+					tempDirImg ="";
 				}
 			}
 
@@ -192,5 +203,15 @@ public class Main {
 			strBuild.append("\n0-Retirarse");
 		}
 			return strBuild.toString();
+	}
+	public static Integer mostrarPantallaPregunta(Jugador jugador,int contador,boolean usoComo){
+		ImageIcon icon;
+		if(jugador.getPreguntaRecibida().getDirImagen() != "")
+		{
+			System.out.println(jugador.getPreguntaRecibida().getDirImagen());
+			icon = new ImageIcon(Main.class.getClassLoader().getResource(jugador.getPreguntaRecibida().getDirImagen()));
+			return Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
+		}
+		else return Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo)));
 	}
 }
