@@ -1,10 +1,12 @@
 package interfaz;
+import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -22,17 +24,19 @@ public class Main {
 	 * */
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args)   {
 		
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		Jugador jugadorAct ;
 		Preguntador preg = cargarPreguntas(new Preguntador());
-		
+		ImageIcon eldojo = new ImageIcon(Main.class.getClassLoader().getResource("Img/2.jpg"));
 		int cantJugador=0;
 		int controlRespuesta =-1;
-		int contadorPreguntas=1;
+		int contadorPreguntas=0;
 		int turno=0;
 		int resp = 0;
+		
+		
 
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
 		String categoriaTextual = null;
@@ -55,12 +59,15 @@ public class Main {
 		{
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
-		
+		for(int i=0; i<jugadores.size(); i++){
+			JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			}
+
 		preg.cambiarCategoria(1);
 		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
 		do {
 			UsoComodin =false;  // inicializacion de los usos de comodin
-			if(contadorPreguntas%10==0)
+			if((contadorPreguntas%10==0 && contadorPreguntas !=0))
 			{
 				preg.cambiarCategoria(++categoriaAct);
 				switch(categoriaAct)
@@ -83,6 +90,7 @@ public class Main {
 				
 				turno = (turno+1)%cantJugador;
 				jugadorAct = jugadores.get(turno);
+				System.out.println(ctrlJugadoresRetidaros);
 				if(jugadorAct.isRetirado()) 
 				{
 					ctrlJugadoresRetidaros++;
@@ -93,39 +101,120 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
+<<<<<<< HEAD
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas, UsoComodin);
+=======
+				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
+
+				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
+
+>>>>>>> e40ca2ad2b4f7abb700e9e02d78f110cd339e6c1
 				if(resp == -1) break;
+
 				controlRespuesta = jugadorAct.responderPregunta(resp);
+<<<<<<< HEAD
 				if(resp == 10) // alternativa si decide usar el comodin 
+=======
+
+
+				if(resp == 10 && jugadorAct.getComodin()>0) // alternativa si decide usar el   comodin 
+>>>>>>> e40ca2ad2b4f7abb700e9e02d78f110cd339e6c1
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
-					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
-					
+					resp = mostrarPantallaPregunta(jugadorAct,contadorPreguntas+1,UsoComodin);
 				}
 				controlRespuesta = jugadorAct.responderPregunta(resp);
+				try {
+				Clip sonido = AudioSystem.getClip(); // test de sonido
+				File test = new File("D:/repositorio/PanamaQuest/src/audio/Acierto.wav");
 				switch(controlRespuesta)
 				{
-				case 1: JOptionPane.showMessageDialog(null,"GENIAL!!! " + jugadorAct.getNombre()+ "  la respuesta ha sido correcta.");break;
-				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+" su respuesta ha sido incorrecta");break;
+
+				case 1:
+				int contvic=0; // contador de victorias for memes reasons
+				if(contvic ==3)
+				{
+					AudioInputStream Audio3vic = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/3goods.wav"));
+					sonido.open(Audio3vic);
+					sonido.start();
+				}
+				AudioInputStream Audioac = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/Acierto.wav"));
+				sonido.open(Audioac);
+				sonido.start();
+				JOptionPane.showMessageDialog(null,"Mensaje", "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta",JOptionPane.INFORMATION_MESSAGE);
+				contvic++;
+				break;
+				case 2: 
+				AudioInputStream Audiofall = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/Perdio.wav"));
+				sonido.open(Audiofall);
+				sonido.start();
+				JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");
+				break;
 				case 0: Jugador temph = jugadores.get(turno);
 				temph.setRetirado(true);
-				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro. \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
+				AudioInputStream Audioret = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/retiro.wav"));
+				sonido.open(Audioret);
+				sonido.start();
+				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
 				break;
 	
 				}
+				}catch(LineUnavailableException Aude)
+				{
+					System.out.print("Error de conexion de audio ");
+				}
+				catch(IOException e)
+				{
+					System.out.print("IOException esta molestando");
+				}
+				catch(UnsupportedAudioFileException UNe)
+				{
+					System.out.print("La musica no es compatible");
+				}
+				
+				
 				contadorPreguntas++;
 			}
+
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
+
+		System.out.println("termine");
+		boolean termine = true;
+		
 		for(int i=0; i<jugadores.size(); i++){
-			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			if(termine == true) {
+			try {
+				Clip sonido = AudioSystem.getClip();
+				AudioInputStream Audiofinal = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/final.wav"));
+				sonido.open(Audiofinal);
+				sonido.start();
+				}catch(LineUnavailableException Aude)
+				{
+					System.out.print("Error de conexion de audio ");
+				}
+				catch(IOException e)
+				{
+					System.out.print("IOException esta molestando");
+				}
+				catch(UnsupportedAudioFileException UNe)
+				{
+					System.out.print("La musica no es compatible");
+				}
 			}
+			termine = false;
+			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+		}
+		
+		JOptionPane.showMessageDialog(null, "Esto fue un trabajo coperativo del DOJO DEL SOFTWARE","Gracias",JOptionPane.PLAIN_MESSAGE,eldojo);
+
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
 	{	
 		BufferedReader br = null;
 		try {
+			
 			ClassLoader cl = Main.class.getClassLoader();
 			String sCurrentLine;
 			String tempPreg = null;
@@ -141,6 +230,7 @@ public class Main {
 				{
 					tempCat++;
 				}
+				System.out.println(sCurrentLine);
 				if((sCurrentLine.charAt(0)=='+'))
 				{
 					tempPreg = sCurrentLine.substring(1);
@@ -234,6 +324,7 @@ public class Main {
 		ImageIcon icon;
 		if(jugador.getPreguntaRecibida().getDirImagen() != "")
 		{
+			System.out.println(jugador.getPreguntaRecibida().getDirImagen());
 			icon = new ImageIcon(Main.class.getClassLoader().getResource(jugador.getPreguntaRecibida().getDirImagen()));
 			do{
 				try{
@@ -241,7 +332,7 @@ public class Main {
 					goodInput=true;
 					}
 				catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un numero porfavor.");
+					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
 					}
 				}while(!goodInput);
 			return a;
@@ -253,7 +344,7 @@ public class Main {
 					goodInput=true;
 					}
 					catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un numero porfavor.");
+					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
 					}
 				}while(!goodInput);
 			return b;

@@ -1,12 +1,22 @@
 package entidades;
 
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import interfaz.Main;
+
 public class Jugador {
 	
 	
 	
 	private double dinero;
 	private String nombre;
-	private int comodin;  // 2 comodines por jugador
+	private int comodin=2;  // 2 comodines por jugador
 	private Pregunta preguntaRecibida;
 	private boolean retirado = false;
 	private int contPregunta;
@@ -17,7 +27,6 @@ public class Jugador {
 	{
 		
 		nombre = nom;
-		comodin = 2;
 		
 		contPregunta = 0;
 	}
@@ -65,15 +74,44 @@ public class Jugador {
 			{
 				if(respuesta == 10 && comodin >0)//uso de comodin
 				{
+					//audio de comodin, porque porque no
+					try {
+					Clip sonido = AudioSystem.getClip();
+					AudioInputStream Audioreti = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/comodin.wav"));
+					sonido.open(Audioreti);
+					sonido.start();
+					}catch(LineUnavailableException Aude)
+					{
+						System.out.print("Error de conexion de audio ");
+					}
+					catch(IOException e)
+					{
+						System.out.print("IOException esta molestando");
+					}
+					catch(UnsupportedAudioFileException UNe)
+					{
+						System.out.print("La musica no es compatible");
+					}
+					
 					comodin--;
 					return 3;
 				}
 				else
+				{
+					if(respuesta == 10 &&comodin <=0)
+					{
+						dinero = 0;  
+						contPregunta = 0;
+						return 4;
+					}
+					else
 				{//incorrecta
 					dinero = 0;  
 					contPregunta = 0;
 					return 2;
 				}
+				}
+					
 			
 			}
 		}
