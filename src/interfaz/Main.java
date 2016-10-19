@@ -35,7 +35,7 @@ public class Main {
 		int contadorPreguntas=0;
 		int turno=0;
 		int resp = 0;
-		
+		int contvic=0; // contador de victorias for memes reasons
 		
 
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
@@ -103,13 +103,14 @@ public class Main {
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
 
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
-
 				if(resp == -1) break;
 
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 
 
-				if(resp == 10 && jugadorAct.getComodin()>0) // alternativa si decide usar el   comodin 
+
+				if(resp == 10 && jugadorAct.getComodin()>=0) // alternativa si decide usar el   comodin 
+
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
@@ -119,23 +120,26 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				try {
 				Clip sonido = AudioSystem.getClip(); // test de sonido
-				
+
 				switch(controlRespuesta)
 				{
 
 				case 1:
-				int contvic=0; // contador de victorias for memes reasons
+				contvic++;
 				if(contvic ==3)
 				{
 					AudioInputStream Audio3vic = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/3goods.wav"));
 					sonido.open(Audio3vic);
 					sonido.start();
 				}
+				else {
 				AudioInputStream Audioac = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/Acierto.wav"));
 				sonido.open(Audioac);
 				sonido.start();
-				JOptionPane.showMessageDialog(null,"Mensaje", "Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta",JOptionPane.INFORMATION_MESSAGE);
-				contvic++;
+				
+				JOptionPane.showMessageDialog(null,"Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta", "Mensaje",JOptionPane.INFORMATION_MESSAGE);
+
+				}
 				break;
 				case 2: 
 				AudioInputStream Audiofall = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/Perdio.wav"));
@@ -198,7 +202,7 @@ public class Main {
 				}
 			}
 			termine = false;
-			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero());
 		}
 		
 		JOptionPane.showMessageDialog(null, "Esto fue un trabajo coperativo del DOJO DEL SOFTWARE","Gracias",JOptionPane.PLAIN_MESSAGE,eldojo);
@@ -327,7 +331,9 @@ public class Main {
 					goodInput=true;
 					}
 				catch(NumberFormatException nfe){
+
 					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+
 					}
 				}while(!goodInput);
 			return a;
@@ -339,7 +345,9 @@ public class Main {
 					goodInput=true;
 					}
 					catch(NumberFormatException nfe){
+
 					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+
 					}
 				}while(!goodInput);
 			return b;

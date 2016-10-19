@@ -38,7 +38,6 @@ public class Preguntador {
 		do
 		{
 			numeroRand = generator.nextInt(preguntaCatAct.size());
-			System.out.println(numeroRand);
 			pregRepetida = false;
 			for(int i=0; i<preguntaCatAct.size() && i<preguntasHechas.size() &&!pregRepetida;i++)
 			{

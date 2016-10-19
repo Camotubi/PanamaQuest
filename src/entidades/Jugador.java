@@ -72,6 +72,7 @@ public class Jugador {
 			}
 			else 
 			{
+				
 				if(respuesta == 10 && comodin >0)//uso de comodin
 				{
 					//audio de comodin, porque porque no
@@ -92,31 +93,24 @@ public class Jugador {
 					{
 						System.out.print("La musica no es compatible");
 					}
-					
+
 					comodin--;
+					
 					return 3;
 				}
-				else
-				{
-					/*if(respuesta == 10 &&comodin <=0)
-					{
-						dinero = 0;  
-						contPregunta = 0;
-						return 4;
-					}
-					else
-				{//incorrecta*/
+
+					if(respuesta == 10) comodin--;
+					//incorrecta
 					dinero = 0;  
 					contPregunta = 0;
 					return 2;
-				//}
 				}
-					
+
 			
 			}
 		}
 		
-	}
+	
 	
 	public int retiro()
 	{
