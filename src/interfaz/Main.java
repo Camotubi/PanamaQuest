@@ -101,7 +101,6 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
-				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
 
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
 
@@ -116,10 +115,11 @@ public class Main {
 					UsoComodin = true;
 					resp = mostrarPantallaPregunta(jugadorAct,contadorPreguntas+1,UsoComodin);
 				}
+				
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				try {
 				Clip sonido = AudioSystem.getClip(); // test de sonido
-				File test = new File("D:/repositorio/PanamaQuest/src/audio/Acierto.wav");
+				
 				switch(controlRespuesta)
 				{
 
@@ -149,6 +149,9 @@ public class Main {
 				sonido.open(Audioret);
 				sonido.start();
 				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
+				break;
+				default :
+				System.out.print("Opcion invalida");
 				break;
 	
 				}
