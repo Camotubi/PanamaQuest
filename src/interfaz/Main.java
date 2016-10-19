@@ -101,24 +101,12 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
-<<<<<<< HEAD
-				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas, UsoComodin);
-=======
-				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
-
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
-
->>>>>>> e40ca2ad2b4f7abb700e9e02d78f110cd339e6c1
 				if(resp == -1) break;
 
 				controlRespuesta = jugadorAct.responderPregunta(resp);
-<<<<<<< HEAD
-				if(resp == 10) // alternativa si decide usar el comodin 
-=======
-
 
 				if(resp == 10 && jugadorAct.getComodin()>0) // alternativa si decide usar el   comodin 
->>>>>>> e40ca2ad2b4f7abb700e9e02d78f110cd339e6c1
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
@@ -332,7 +320,7 @@ public class Main {
 					goodInput=true;
 					}
 				catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+					JOptionPane.showMessageDialog(null, "Inserte un nï¿½mero porfavor.");
 					}
 				}while(!goodInput);
 			return a;
@@ -344,7 +332,7 @@ public class Main {
 					goodInput=true;
 					}
 					catch(NumberFormatException nfe){
-					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+					JOptionPane.showMessageDialog(null, "Inserte un nï¿½mero porfavor.");
 					}
 				}while(!goodInput);
 			return b;
