@@ -47,7 +47,7 @@ public class Main {
 			goodInput=true;
 			}
 			catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+				JOptionPane.showMessageDialog(null, "Inserte un nï¿½mero porfavor.");
 			}
 		}while(!goodInput);
 	
