@@ -29,10 +29,10 @@ public class Main {
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		Jugador jugadorAct ;
 		Preguntador preg = cargarPreguntas(new Preguntador());
-		
+		ImageIcon eldojo = new ImageIcon(Main.class.getClassLoader().getResource("Img/2.jpg"));
 		int cantJugador=0;
 		int controlRespuesta =-1;
-		int contadorPreguntas=1;
+		int contadorPreguntas=0;
 		int turno=0;
 		int resp = 0;
 		
@@ -59,12 +59,15 @@ public class Main {
 		{
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
-		
+		for(int i=0; i<jugadores.size(); i++){
+			JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			}
+
 		preg.cambiarCategoria(1);
 		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
 		do {
 			UsoComodin =false;  // inicializacion de los usos de comodin
-			if(contadorPreguntas%10==0)
+			if((contadorPreguntas%10==0 && contadorPreguntas !=0))
 			{
 				preg.cambiarCategoria(++categoriaAct);
 				switch(categoriaAct)
@@ -99,15 +102,19 @@ public class Main {
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
 				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
-				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas, UsoComodin);
+
+				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
+
 				if(resp == -1) break;
+
 				controlRespuesta = jugadorAct.responderPregunta(resp);
-				if(resp == 10 && jugadorAct.getComodin() > 0) // alternativa si decide usar el   comodin 
+
+
+				if(resp == 10 && jugadorAct.getComodin()>0) // alternativa si decide usar el   comodin 
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
-					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
-					
+					resp = mostrarPantallaPregunta(jugadorAct,contadorPreguntas+1,UsoComodin);
 				}
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				try {
@@ -161,6 +168,7 @@ public class Main {
 				
 				contadorPreguntas++;
 			}
+
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
 
 		System.out.println("termine");
@@ -188,8 +196,10 @@ public class Main {
 			}
 			termine = false;
 			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
-			
 		}
+		
+		JOptionPane.showMessageDialog(null, "Esto fue un trabajo coperativo del DOJO DEL SOFTWARE","Gracias",JOptionPane.PLAIN_MESSAGE,eldojo);
+
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
