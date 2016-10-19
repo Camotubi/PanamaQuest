@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 import entidades.Jugador;
 import entidades.Pregunta;
 import entidades.Preguntador;
-import entidades.Jugador;
 
 public class Main {
 	
@@ -30,7 +30,7 @@ public class Main {
 		Jugador jugadorAct ;
 		Preguntador preg = cargarPreguntas(new Preguntador());
 		
-		int cantJugador;
+		int cantJugador=0;
 		int controlRespuesta =-1;
 		int contadorPreguntas=1;
 		int turno=0;
@@ -42,16 +42,23 @@ public class Main {
 		String categoriaTextual = null;
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
+		boolean goodInput=false;
 		int ctrlJugadoresRetidaros = 0;
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
-		cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
-		
+		do{
+			try{
+			cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
+			goodInput=true;
+			}
+			catch(NumberFormatException nfe){
+				JOptionPane.showMessageDialog(null, "Inserte un n�mero porfavor.");
+			}
+		}while(!goodInput);
 	
 		for(int i =0; i<cantJugador ;i++)
 		{
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
-		
 		
 		preg.cambiarCategoria(1);
 		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
@@ -93,12 +100,14 @@ public class Main {
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
 				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas, UsoComodin);
+				if(resp == -1) break;
 				controlRespuesta = jugadorAct.responderPregunta(resp);
-				if(resp == 10) // alternativa si decide usar el   comodin 
+				if(resp == 10 && jugadorAct.getComodin() > 0) // alternativa si decide usar el   comodin 
 				{
-					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " uso un comodin, le quedan " + jugadorAct.getComodin());
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
 					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
+					
 				}
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				try {
@@ -106,6 +115,7 @@ public class Main {
 				File test = new File("D:/repositorio/PanamaQuest/src/audio/Acierto.wav");
 				switch(controlRespuesta)
 				{
+
 				case 1:
 				int contvic=0; // contador de victorias for memes reasons
 				if(contvic ==3)
@@ -132,7 +142,6 @@ public class Main {
 				sonido.open(Audioret);
 				sonido.start();
 				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
-				
 				break;
 	
 				}
@@ -153,7 +162,34 @@ public class Main {
 				contadorPreguntas++;
 			}
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
+
 		System.out.println("termine");
+		boolean termine = true;
+		
+		for(int i=0; i<jugadores.size(); i++){
+			if(termine == true) {
+			try {
+				Clip sonido = AudioSystem.getClip();
+				AudioInputStream Audiofinal = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/final.wav"));
+				sonido.open(Audiofinal);
+				sonido.start();
+				}catch(LineUnavailableException Aude)
+				{
+					System.out.print("Error de conexion de audio ");
+				}
+				catch(IOException e)
+				{
+					System.out.print("IOException esta molestando");
+				}
+				catch(UnsupportedAudioFileException UNe)
+				{
+					System.out.print("La musica no es compatible");
+				}
+			}
+			termine = false;
+			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			
+		}
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
@@ -247,6 +283,7 @@ public class Main {
 			
 		
 			strBuild.append("\n0-Retirarse");
+			strBuild.append("\n-1-Salir del juego");
 		}
 		else {
 			for(int i=0;i<jugador.getPreguntaRecibida().getOpciones().size();i++)
@@ -259,6 +296,7 @@ public class Main {
 				
 			}
 			strBuild.append("\n0-Retirarse");
+			strBuild.append("\n-1-Salir del juego");
 		}
 			return strBuild.toString();
 	}
