@@ -93,11 +93,10 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
-				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas, UsoComodin);
 				if(resp == -1) break;
 				controlRespuesta = jugadorAct.responderPregunta(resp);
-				if(resp == 10) // alternativa si decide usar el   comodin 
+				if(resp == 10) // alternativa si decide usar el comodin 
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
