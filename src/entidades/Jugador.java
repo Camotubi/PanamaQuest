@@ -69,11 +69,21 @@ public class Jugador {
 					return 3;
 				}
 				else
+				{
+					if(respuesta == 10 &&comodin <=0)
+					{
+						dinero = 0;  
+						contPregunta = 0;
+						return 4;
+					}
+					else
 				{//incorrecta
 					dinero = 0;  
 					contPregunta = 0;
 					return 2;
 				}
+				}
+					
 			
 			}
 		}
