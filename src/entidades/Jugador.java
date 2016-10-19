@@ -93,6 +93,7 @@ public class Jugador {
 					{
 						System.out.print("La musica no es compatible");
 					}
+
 					comodin--;
 					
 					return 3;

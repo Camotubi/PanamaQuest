@@ -101,16 +101,15 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
-				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
-
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
-
 				if(resp == -1) break;
 
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 
 
+
 				if(resp == 10 && jugadorAct.getComodin()>=0) // alternativa si decide usar el   comodin 
+
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
@@ -119,6 +118,7 @@ public class Main {
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				try {
 				Clip sonido = AudioSystem.getClip(); // test de sonido
+
 				switch(controlRespuesta)
 				{
 
@@ -133,7 +133,9 @@ public class Main {
 				AudioInputStream Audioac = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/Acierto.wav"));
 				sonido.open(Audioac);
 				sonido.start();
+
 				JOptionPane.showMessageDialog(null,"Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta", "Mensaje",JOptionPane.INFORMATION_MESSAGE);
+
 				contvic++;
 				break;
 				case 2: 
@@ -194,7 +196,7 @@ public class Main {
 				}
 			}
 			termine = false;
-			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero());
 		}
 		
 		JOptionPane.showMessageDialog(null, "Esto fue un trabajo coperativo del DOJO DEL SOFTWARE","Gracias",JOptionPane.PLAIN_MESSAGE,eldojo);
@@ -323,7 +325,9 @@ public class Main {
 					goodInput=true;
 					}
 				catch(NumberFormatException nfe){
+
 					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+
 					}
 				}while(!goodInput);
 			return a;
@@ -335,7 +339,9 @@ public class Main {
 					goodInput=true;
 					}
 					catch(NumberFormatException nfe){
+
 					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+
 					}
 				}while(!goodInput);
 			return b;
