@@ -30,7 +30,7 @@ public class Main {
 		
 		int cantJugador=0;
 		int controlRespuesta =-1;
-		int contadorPreguntasTotales=0;
+		int contadorPreguntas=0;
 		int turno=0;
 		int resp = 0;
 
@@ -47,7 +47,7 @@ public class Main {
 			goodInput=true;
 			}
 			catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+				JOptionPane.showMessageDialog(null, "Inserte un nï¿½mero porfavor.");
 			}
 		}while(!goodInput);
 	
@@ -58,11 +58,12 @@ public class Main {
 		for(int i=0; i<jugadores.size(); i++){
 			JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
 			}
+
 		preg.cambiarCategoria(1);
 		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
 		do {
 			UsoComodin =false;  // inicializacion de los usos de comodin
-			if((contadorPreguntasTotales%10==0 && contadorPreguntasTotales !=0))
+			if((contadorPreguntas%10==0 && contadorPreguntas !=0))
 			{
 				preg.cambiarCategoria(++categoriaAct);
 				switch(categoriaAct)
@@ -96,13 +97,20 @@ public class Main {
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
 				//resp = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
-				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntasTotales+1, UsoComodin);
+
+				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
+
+				if(resp == -1) break;
+
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10) // alternativa si decide usar el   comodin 
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
 					UsoComodin = true;
-					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntasTotales,UsoComodin)));
+					resp = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugadorAct,contadorPreguntas,UsoComodin)));
+
+
+
 				}
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				switch(controlRespuesta)
@@ -111,16 +119,18 @@ public class Main {
 				case 2: JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+" su respuesta ha sido incorrecta");break;
 				case 0: Jugador temph = jugadores.get(turno);
 				temph.setRetirado(true);
-				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro. \n Pregunta en la que se retiro:"+contadorPreguntasTotales+"\n dinero acumulado fue :"+temph.getDinero());
+				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro. \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
 				break;
 	
 				}
-				contadorPreguntasTotales++;
+				contadorPreguntas++;
 			}
-		}while((categoriaAct<3 || contadorPreguntasTotales%10!=0) &&jugadoresDisponibles);
-		/*for(int i=0; i<jugadores.size(); i++){
-		JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
-		}*/
+
+		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
+		for(int i=0; i<jugadores.size(); i++){
+			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			}
+
 	}
 
 	public static Preguntador cargarPreguntas(Preguntador preguntador)
@@ -212,6 +222,7 @@ public class Main {
 			
 		
 			strBuild.append("\n0-Retirarse");
+			strBuild.append("\n-1-Salir del juego");
 		}
 		else {
 			for(int i=0;i<jugador.getPreguntaRecibida().getOpciones().size();i++)
@@ -224,6 +235,7 @@ public class Main {
 				
 			}
 			strBuild.append("\n0-Retirarse");
+			strBuild.append("\n-1-Salir del juego");
 		}
 			return strBuild.toString();
 	}
