@@ -104,20 +104,14 @@ public class Main {
 
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
 				if(resp == -1) break;
-
-			
-
-
-				jugadorAct.responderPregunta(resp);
+				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10 && jugadorAct.getComodin()>=0) // alternativa si decide usar el   comodin 
-
 				{
 					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ ", te quedan  " + jugadorAct.getComodin()+ " comodin(es) restante(s).");
 					UsoComodin = true;
 					resp = mostrarPantallaPregunta(jugadorAct,contadorPreguntas+1,UsoComodin);
+					controlRespuesta = jugadorAct.responderPregunta(resp);
 				}
-				
-				controlRespuesta = jugadorAct.responderPregunta(resp);
 				try {
 				Clip sonido = AudioSystem.getClip(); // test de sonido
 
