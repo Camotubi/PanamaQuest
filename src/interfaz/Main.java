@@ -35,7 +35,7 @@ public class Main {
 		int contadorPreguntas=0;
 		int turno=0;
 		int resp = 0;
-		
+		int contvic=0; // contador de victorias for memes reasons
 		
 
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
@@ -51,7 +51,7 @@ public class Main {
 			goodInput=true;
 			}
 			catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(null, "Inserte un nï¿½mero porfavor.");
+				JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
 			}
 		}while(!goodInput);
 	
@@ -60,7 +60,7 @@ public class Main {
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
 		for(int i=0; i<jugadores.size(); i++){
-			JOptionPane.showMessageDialog(null, "Jugador"+(i+1)+":\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero()+"\n\nPreguntas Resueltas: "+jugadores.get(i).getcontPregunta());
+			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero());
 			}
 
 		preg.cambiarCategoria(1);
@@ -101,20 +101,22 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
+
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
 				if(resp == -1) break;
 
-				controlRespuesta = jugadorAct.responderPregunta(resp);
+			
 
 
-
+				jugadorAct.responderPregunta(resp);
 				if(resp == 10 && jugadorAct.getComodin()>=0) // alternativa si decide usar el   comodin 
 
 				{
-					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ " te quedan  " + jugadorAct.getComodin()+ " comodin restante.");
+					JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+ ", te quedan  " + jugadorAct.getComodin()+ " comodin(es) restante(s).");
 					UsoComodin = true;
 					resp = mostrarPantallaPregunta(jugadorAct,contadorPreguntas+1,UsoComodin);
 				}
+				
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				try {
 				Clip sonido = AudioSystem.getClip(); // test de sonido
@@ -123,39 +125,46 @@ public class Main {
 				{
 
 				case 1:
-				int contvic=0; // contador de victorias for memes reasons
+				contvic++;
 				if(contvic ==3)
 				{
 					AudioInputStream Audio3vic = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/3goods.wav"));
 					sonido.open(Audio3vic);
 					sonido.start();
+					JOptionPane.showMessageDialog(null,"Felicidades " + jugadorAct.getNombre()+", la respuesta ha sido correcta", "Mensaje",JOptionPane.INFORMATION_MESSAGE);
+
 				}
+				else {
 				AudioInputStream Audioac = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/Acierto.wav"));
 				sonido.open(Audioac);
 				sonido.start();
+				
+				JOptionPane.showMessageDialog(null,"Felicidades " + jugadorAct.getNombre()+", la respuesta ha sido correcta", "Mensaje",JOptionPane.INFORMATION_MESSAGE);
 
-				JOptionPane.showMessageDialog(null,"Felicidades " + jugadorAct.getNombre()+"la respuesta ha sido correcta", "Mensaje",JOptionPane.INFORMATION_MESSAGE);
-
-				contvic++;
+				}
 				break;
 				case 2: 
+				contvic=0;
 				AudioInputStream Audiofall = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/Perdio.wav"));
 				sonido.open(Audiofall);
 				sonido.start();
-				JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+"su respuesta ha sido incorrecta");
+				JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+", su respuesta ha sido incorrecta");
 				break;
 				case 0: Jugador temph = jugadores.get(turno);
 				temph.setRetirado(true);
 				AudioInputStream Audioret = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/retiro.wav"));
 				sonido.open(Audioret);
 				sonido.start();
-				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro \n Pregunta en la que se retiro:"+contadorPreguntas+"\n dinero acumulado fue :"+temph.getDinero());
+				JOptionPane.showMessageDialog(null, "El jugador "+temph.getNombre()+" se retiro. \n Pregunta en la que se retiro: "+contadorPreguntas+"\n Dinero acumulado: "+temph.getDinero());
+				break;
+				default :
+				System.out.print("Opcion invalida");
 				break;
 	
 				}
 				}catch(LineUnavailableException Aude)
 				{
-					System.out.print("Error de conexion de audio ");
+					System.out.print("Error de conexion de audio");
 				}
 				catch(IOException e)
 				{
@@ -172,7 +181,7 @@ public class Main {
 
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
 
-		System.out.println("termine");
+		//System.out.println("termine");
 		boolean termine = true;
 		
 		for(int i=0; i<jugadores.size(); i++){
@@ -223,7 +232,7 @@ public class Main {
 				{
 					tempCat++;
 				}
-				System.out.println(sCurrentLine);
+				//System.out.println(sCurrentLine);
 				if((sCurrentLine.charAt(0)=='+'))
 				{
 					tempPreg = sCurrentLine.substring(1);
