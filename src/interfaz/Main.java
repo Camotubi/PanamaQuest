@@ -23,13 +23,13 @@ public class Main {
 		Preguntador preg = cargarPreguntas(new Preguntador());
 		ImageIcon eldojo = new ImageIcon(Main.class.getClassLoader().getResource("Img/2.jpg"));
 		int cantJugador=0;
-		int controlRespuesta =-1;
-		int contadorPreguntas=0;
-		int turno= 0;
-		int resp = 0;
+		int controlRespuesta =-1;//utilizada para saber si el jugador tuvo buena o mala la respuesta
+		int contadorPreguntas=0; 
+		int turno= 0; //dicta que jugador le toca
+		int resp = 0; // recibe respuesta de los jugadores
 		int contvic=0; // contador de victorias for memes reasons
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
-		String categoriaTextual = null;
+		String[] categoriaTextual = {"Geografia","Historia","Cultura"};
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
 		boolean goodInput=false;
@@ -67,19 +67,7 @@ public class Main {
 			if((contadorPreguntas%10==0 && contadorPreguntas !=0))
 			{
 				preg.cambiarCategoria(++categoriaAct);
-				switch(categoriaAct)
-				{
-				case 1 : 
-					categoriaTextual = "Geografia";
-					break;
-				case 2:
-					categoriaTextual = "Historia";
-					break;
-				case 3:
-					categoriaTextual = "Cultura";
-					break;
-				}
-				JOptionPane.showMessageDialog(null,categoriaTextual);
+				JOptionPane.showMessageDialog(null,categoriaTextual[categoriaAct-1]);
 			}
 			ctrlJugadoresRetidaros = 0;
 			do
