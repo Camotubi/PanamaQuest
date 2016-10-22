@@ -16,7 +16,7 @@ public class Jugador {
 	
 	private double dinero;
 	private String nombre;
-	private int comodin=2;  // 2 comodines por jugador
+	private int comodin;  // 2 comodines por jugador
 	private Pregunta preguntaRecibida;
 	private boolean retirado = false;
 	private int contPregunta;
@@ -27,7 +27,7 @@ public class Jugador {
 	{
 		
 		nombre = nom;
-		
+		comodin=2;
 		contPregunta = 0;
 	}
 	
@@ -98,19 +98,19 @@ public class Jugador {
 					
 					return 3;
 				}
-				else
-				{
+
 					if(respuesta == 10) comodin--;
 					//incorrecta
 					dinero = 0;  
 					contPregunta = 0;
 					return 2;
 				}
+
 			
 			}
 		}
 		
-	}
+	
 	
 	public int retiro()
 	{

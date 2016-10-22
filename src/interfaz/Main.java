@@ -28,6 +28,7 @@ public class Main {
 		int turno= 0; //dicta que jugador le toca
 		int resp = 0; // recibe respuesta de los jugadores
 		int contvic=0; // contador de victorias for memes reasons
+
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
 		String[] categoriaTextual = {"Geografia","Historia","Cultura"}; //Utilizado para mostrar la Categoria Actual
 		boolean UsoComodin = false; //control sobre los comodines para mostrar opciones
@@ -84,6 +85,7 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
+
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
 				if(resp == -1) break;//Si introduce -1 se termina el juego
 				controlRespuesta = jugadorAct.responderPregunta(resp);
@@ -94,6 +96,7 @@ public class Main {
 					resp = mostrarPantallaPregunta(jugadorAct,contadorPreguntas+1,UsoComodin);
 					controlRespuesta = jugadorAct.responderPregunta(resp);
 				}
+
 				try {
 				Clip sonido = AudioSystem.getClip(); // test de sonido
 
@@ -101,6 +104,7 @@ public class Main {
 				{
 
 				case 1://Caso de respuesta correcta
+
 				contvic++;
 				if(contvic ==3)
 				{
@@ -115,7 +119,9 @@ public class Main {
 				sonido.open(Audioac);
 				sonido.start();
 				
+
 				JOptionPane.showMessageDialog(null,"Felicidades " + jugadorAct.getNombre()+", la respuesta ha sido correcta", "Mensaje",JOptionPane.INFORMATION_MESSAGE);
+
 
 				}
 				break;
@@ -137,6 +143,7 @@ public class Main {
 				default :
 				System.out.print("Opcion invalida");
 				break;
+
 	
 				}
 				}catch(LineUnavailableException Aude)
