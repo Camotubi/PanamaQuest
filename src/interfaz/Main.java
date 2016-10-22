@@ -29,11 +29,11 @@ public class Main {
 		int resp = 0; // recibe respuesta de los jugadores
 		int contvic=0; // contador de victorias for memes reasons
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
-		String[] categoriaTextual = {"Geografia","Historia","Cultura"};
+		String[] categoriaTextual = {"Geografia","Historia","Cultura"}; //Utilizado para mostrar la Categoria Actual
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
-		boolean goodInput=false;
-		int ctrlJugadoresRetidaros = 0;
+		boolean goodInput=false; //Utilizada para controlar si el usuario introdujo algo esperado ( por ejemplo un numero en vez de letra)
+		int contadorlJugadoresRetidaros = 0;
 		String entradaTeclado = null;
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
 		do{
@@ -69,17 +69,17 @@ public class Main {
 				preg.cambiarCategoria(++categoriaAct);
 				JOptionPane.showMessageDialog(null,categoriaTextual[categoriaAct-1]);
 			}
-			ctrlJugadoresRetidaros = 0;
+			contadorlJugadoresRetidaros = 0;
 			do
 			{
 				
 				turno = (turno+1)%cantJugador;
 				jugadorAct = jugadores.get(turno);
-				System.out.println(ctrlJugadoresRetidaros);
+				System.out.println(contadorlJugadoresRetidaros);
 				if(jugadorAct.isRetirado()) 
 				{
-					ctrlJugadoresRetidaros++;
-					if(ctrlJugadoresRetidaros>= jugadores.size()) jugadoresDisponibles = false;
+					contadorlJugadoresRetidaros++;
+					if(contadorlJugadoresRetidaros>= jugadores.size()) jugadoresDisponibles = false;
 
 				}
 			}while(jugadorAct.isRetirado() && jugadoresDisponibles);
@@ -160,11 +160,10 @@ public class Main {
 
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
 
-		boolean termine = true;
 		
 		
 		for(int i=0; i<jugadores.size(); i++){
-			if(termine == true) {
+			if(i == 0) {
 			try {
 				Clip sonido = AudioSystem.getClip();
 				AudioInputStream Audiofinal = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/final.wav"));
@@ -183,7 +182,6 @@ public class Main {
 					System.out.print("La musica no es compatible");
 				}
 			}
-			termine = false;
 			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero());
 		}
 		
