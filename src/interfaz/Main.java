@@ -30,7 +30,7 @@ public class Main {
 		int contvic=0; // contador de victorias for memes reasons
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
 		String[] categoriaTextual = {"Geografia","Historia","Cultura"}; //Utilizado para mostrar la Categoria Actual
-		boolean UsoComodin; //control sobre los comodines para mostrar opciones
+		boolean UsoComodin = false; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
 		boolean goodInput=false; //Utilizada para controlar si el usuario introdujo algo esperado ( por ejemplo un numero en vez de letra)
 		int contadorlJugadoresRetidaros = 0;
@@ -61,13 +61,12 @@ public class Main {
 			}
 
 		preg.cambiarCategoria(1);
-		JOptionPane.showMessageDialog(null,"Categoria actual : Geografia");
+		JOptionPane.showMessageDialog(null,categoriaTextual[categoriaAct-1],"Categoria Actual",JOptionPane.INFORMATION_MESSAGE);
 		do {
-			UsoComodin =false;  // inicializacion de los usos de comodin
 			if((contadorPreguntas%10==0 && contadorPreguntas !=0))
 			{
 				preg.cambiarCategoria(++categoriaAct);
-				JOptionPane.showMessageDialog(null,categoriaTextual[categoriaAct-1]);
+				JOptionPane.showMessageDialog(null,categoriaTextual[categoriaAct-1],"Categoria Actual",JOptionPane.INFORMATION_MESSAGE);
 			}
 			contadorlJugadoresRetidaros = 0;
 			do
@@ -75,7 +74,6 @@ public class Main {
 				
 				turno = (turno+1)%cantJugador;
 				jugadorAct = jugadores.get(turno);
-				System.out.println(contadorlJugadoresRetidaros);
 				if(jugadorAct.isRetirado()) 
 				{
 					contadorlJugadoresRetidaros++;
@@ -86,9 +84,8 @@ public class Main {
 			if(jugadoresDisponibles)
 			{
 				jugadorAct.setPreguntaRecibida(preg.preguntar());
-
 				resp = mostrarPantallaPregunta(jugadorAct, contadorPreguntas+1, UsoComodin);
-				if(resp == -1) break;
+				if(resp == -1) break;//Si introduce -1 se termina el juego
 				controlRespuesta = jugadorAct.responderPregunta(resp);
 				if(resp == 10 && jugadorAct.getComodin()>=0) // alternativa si decide usar el   comodin 
 				{
@@ -103,7 +100,7 @@ public class Main {
 				switch(controlRespuesta)
 				{
 
-				case 1:
+				case 1://Caso de respuesta correcta
 				contvic++;
 				if(contvic ==3)
 				{
@@ -122,14 +119,15 @@ public class Main {
 
 				}
 				break;
-				case 2: 
+				case 2: //Caso de Respuesta incorrecta
 				contvic=0;
 				AudioInputStream Audiofall = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/Perdio.wav"));
 				sonido.open(Audiofall);
 				sonido.start();
 				JOptionPane.showMessageDialog(null, jugadorAct.getNombre()+", su respuesta ha sido incorrecta");
 				break;
-				case 0: Jugador temph = jugadores.get(turno);
+				case 0://Caso de retirarse del juego
+				Jugador temph = jugadores.get(turno);
 				temph.setRetirado(true);
 				AudioInputStream Audioret = AudioSystem.getAudioInputStream(Main.class.getClassLoader().getResource("audio/retiro.wav"));
 				sonido.open(Audioret);
@@ -162,7 +160,7 @@ public class Main {
 
 		
 		
-		for(int i=0; i<jugadores.size(); i++){
+		for(int i=0; i<jugadores.size(); i++){//Pantalla de el dinero final de los jugadores
 			if(i == 0) {
 			try {
 				Clip sonido = AudioSystem.getClip();
@@ -189,7 +187,7 @@ public class Main {
 
 	}
 
-	public static Preguntador cargarPreguntas(Preguntador preguntador)
+	public static Preguntador cargarPreguntas(Preguntador preguntador)//Carga las preguntas desde una archivo
 	{	
 		BufferedReader br = null;
 		try {
@@ -209,7 +207,6 @@ public class Main {
 				{
 					tempCat++;
 				}
-				//System.out.println(sCurrentLine);
 				if((sCurrentLine.charAt(0)=='+'))
 				{
 					tempPreg = sCurrentLine.substring(1);
@@ -247,7 +244,7 @@ public class Main {
 		}
 		return preguntador;
 	}
-	public static String stringPregunta(Jugador jugador,int contador,boolean usoComo)
+	public static String stringPregunta(Jugador jugador,int contador,boolean usoComo)//Genera el string que se mostrar en la pantalla de preguntas
 	{
 		int contadordepreguntas=0;
 		boolean respencontrada = false;
@@ -299,7 +296,7 @@ public class Main {
 	}
 	
 	
-	public static Integer mostrarPantallaPregunta(Jugador jugador,int contador,boolean usoComo){
+	public static Integer mostrarPantallaPregunta(Jugador jugador,int contador,boolean usoComo){//Muestra la pregunta, las posibles opciones y la imagen si la tiene de la pregunta
 		Integer retorno=0;
 		boolean goodInput = false;
 		String entradaTeclado = null;
