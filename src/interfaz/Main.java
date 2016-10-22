@@ -1,7 +1,5 @@
 package interfaz;
-import java.io.*;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -11,48 +9,47 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import entidades.Jugador;
-import entidades.Pregunta;
 import entidades.Preguntador;
 
 public class Main {
 	
-	/*Cosas por hacer
-	 * evitar que las preguntas se repitan 
-	 * arreglar el mensaje de pregunta correcta
-	 * agregar pregunta de audio
-	 * 
-	 * */
+
 	
 
 	public static void main(String[] args)   {
 		
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-		Jugador jugadorAct ;
+		Jugador jugadorAct;
 		Preguntador preg = cargarPreguntas(new Preguntador());
 		ImageIcon eldojo = new ImageIcon(Main.class.getClassLoader().getResource("Img/2.jpg"));
 		int cantJugador=0;
 		int controlRespuesta =-1;
 		int contadorPreguntas=0;
-		int turno=0;
+		int turno= 0;
 		int resp = 0;
 		int contvic=0; // contador de victorias for memes reasons
-		
-
 		int categoriaAct = 1; // cat 1 = geografia, cat2 = historia, cat 3 = cultura		
 		String categoriaTextual = null;
 		boolean UsoComodin; //control sobre los comodines para mostrar opciones
 		boolean jugadoresDisponibles = true;
 		boolean goodInput=false;
 		int ctrlJugadoresRetidaros = 0;
+		String entradaTeclado = null;
 		JOptionPane.showMessageDialog(null, "PanamaQuest 1.0");
 		do{
 			try{
-			cantJugador = Integer.parseInt(JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?"));
-			goodInput=true;
+				entradaTeclado = JOptionPane.showInputDialog(null,"Cuantos jugadores jugaran esta vez?");
+				cantJugador = Integer.parseInt(entradaTeclado);
+				goodInput=true;
 			}
 			catch(NumberFormatException nfe){
-				JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+				if(entradaTeclado == null)
+				{
+					JOptionPane.showMessageDialog(null,"Adios","Cerrando....." , JOptionPane.PLAIN_MESSAGE);
+					System.exit(0);
+				}else JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
 			}
+
 		}while(!goodInput);
 	
 		for(int i =0; i<cantJugador ;i++)
@@ -60,7 +57,7 @@ public class Main {
 			jugadores.add(new Jugador(JOptionPane.showInputDialog(null,"Ingrese el nombre del jugador "+(i+1))));
 		}
 		for(int i=0; i<jugadores.size(); i++){
-			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero());
+			JOptionPane.showMessageDialog(null, "Jugador "+(i+1)+"\n\nNombre: "+jugadores.get(i).getNombre()+"\n\nDinero: "+jugadores.get(i).getDinero(),"Informacion del jugador",JOptionPane.INFORMATION_MESSAGE);
 			}
 
 		preg.cambiarCategoria(1);
@@ -175,8 +172,8 @@ public class Main {
 
 		}while((categoriaAct<3 || contadorPreguntas%10!=0) &&jugadoresDisponibles);
 
-		//System.out.println("termine");
 		boolean termine = true;
+		
 		
 		for(int i=0; i<jugadores.size(); i++){
 			if(termine == true) {
@@ -314,40 +311,52 @@ public class Main {
 		}
 			return strBuild.toString();
 	}
+	
+	
 	public static Integer mostrarPantallaPregunta(Jugador jugador,int contador,boolean usoComo){
-		Integer a=0, b=0;
+		Integer retorno=0;
 		boolean goodInput = false;
+		String entradaTeclado = null;
 		ImageIcon icon;
 		if(jugador.getPreguntaRecibida().getDirImagen() != "")
 		{
-			System.out.println(jugador.getPreguntaRecibida().getDirImagen());
 			icon = new ImageIcon(Main.class.getClassLoader().getResource(jugador.getPreguntaRecibida().getDirImagen()));
 			do{
 				try{
-					a = Integer.parseInt((String) JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo),"",JOptionPane.PLAIN_MESSAGE,icon,null,null));
+					entradaTeclado =(String) JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo),"",JOptionPane.PLAIN_MESSAGE,icon, null,"") ;
+					retorno = Integer.parseInt(entradaTeclado);
 					goodInput=true;
 					}
 				catch(NumberFormatException nfe){
-
-					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+					if(entradaTeclado == null )
+					{
+						JOptionPane.showMessageDialog(null, "Adios","Cerrando....." , JOptionPane.PLAIN_MESSAGE);
+						System.exit(0);
+					}else JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
 
 					}
 				}while(!goodInput);
-			return a;
+			return retorno;
 		}
 		else{
 			do{
 				try{
-					b = Integer.parseInt(JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo)));
+					entradaTeclado=JOptionPane.showInputDialog(null,stringPregunta(jugador,contador,usoComo));
+					 retorno= Integer.parseInt(entradaTeclado);
 					goodInput=true;
 					}
 					catch(NumberFormatException nfe){
 
-					JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
+						if(entradaTeclado == null  )
+						{
+							JOptionPane.showMessageDialog(null, "Adios","Cerrando....." , JOptionPane.PLAIN_MESSAGE);
+							System.exit(0);
+							
+						}else JOptionPane.showMessageDialog(null, "Inserte un número porfavor.");
 
 					}
 				}while(!goodInput);
-			return b;
+			return retorno;
 			} 
 	}
 }
